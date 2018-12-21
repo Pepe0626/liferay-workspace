@@ -1,0 +1,6 @@
+Bundle-Name: Search Portlet
+Bundle-SymbolicName: konakart.search
+Bundle-Version: 8.9.0.0
+-metatype: *
+Web-ContextPath: /KKSearch
+-dsannotations: *

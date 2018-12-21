@@ -1,0 +1,79 @@
+/*
+# (c) 2015 DS Data Systems UK Ltd, All rights reserved.
+#
+# DS Data Systems and KonaKart and their respective logos, are 
+# trademarks of DS Data Systems UK Ltd. All rights reserved.
+#
+# The information in this document below this text is free software; you can redistribute 
+# it and/or modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+# 
+# This software is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+*/
+
+#kkft-side-menu{
+	float: left;
+	line-height: 20px;
+	margin-right: 2%;
+	width: 17%;
+}
+
+#kkft-side-menu ul li  {
+	word-wrap:break-word;
+	text-indent: 0;
+}
+
+#kkft-side-menu .kkft-side-menu-section ul {
+	margin-left: 0;
+}
+
+#kkft-side-menu h1 {
+	font-size: 1.25em;
+	margin: 0.5em 0;
+}
+
+#kkft-side-menu .kkft-side-menu-section{
+	margin-bottom: 1.5em;
+}
+
+
+#kkft-side-menu .kkft-current-cat,  #kkft-side-menu h2{
+	font-weight: 600;
+	margin-bottom: 0.25em;
+	font-size: 1em;
+}
+
+
+#kkft-side-menu ul, #kkft-side-menu ul li, #kkft-side-menu ul li a {
+	clear: both;
+	font-size: 1.0em;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	color: #000;
+}
+
+#kkft-remove-all{
+	height: 17px;
+}
+
+#kkft-remove-all a{
+	margin-left: 3px;
+}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,213 @@
+/*
+# (c) 2015 DS Data Systems UK Ltd, All rights reserved.
+#
+# DS Data Systems and KonaKart and their respective logos, are 
+# trademarks of DS Data Systems UK Ltd. All rights reserved.
+#
+# The information in this document below this text is free software; you can redistribute 
+# it and/or modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+# 
+# This software is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+*/
+
+
+.kkos-item-area{
+	background: #fff;
+	margin-top: 1em;
+	display: inline-block;
+	overflow: hidden;
+	width: 100%;
+}
+
+.kkos-item-area-header {
+	height: auto;
+	overflow: hidden;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.kkos-item-area-header-top {
+	overflow: hidden;
+	width: 100%;
+}
+
+.kkos-item-area-header-top{
+	border-top: 1px solid #e5e5e5;
+}
+
+.kkos-navigation-element{	
+	padding: 10px;
+}
+
+/* No items info */
+
+.kkos-number-of-items {
+	float: left;
+}
+
+/* Pagination controls */
+
+.kkos-pagination {
+	float: right;
+}
+
+.kkos-pagination .kkos-current{
+	background-color: #000;
+	color: white;
+	margin-right: 2px;
+}
+
+.kkos-pagination-element{
+	float: left;
+	height: 20px;
+	text-align: center;
+	width: 20px;
+	cursor: pointer;
+}
+
+.kkos-previous-items{
+	background: url('../images/arrow-left.png') center center no-repeat;
+	margin-right: 1em;
+}
+
+.kkos-next-items{
+	margin-left: 0.75em;
+}
+
+.kkos-previous-items:hover{
+	background: url('../images/arrow-left-hover.png') center center no-repeat;
+}
+
+.kkos-previous-items-inactive {
+	background: url('../images/arrow-left-inactive.png') center center no-repeat;
+	margin-right: 1em;
+}
+
+.kkos-next-items{
+	background: url('../images/arrow-right.png') center center no-repeat;
+}
+
+.kkos-next-items:hover{
+	background: url('../images/arrow-right-hover.png') center center no-repeat;
+}
+
+.kkos-next-items-inactive{
+	background: url('../images/arrow-right-inactive.png') center center no-repeat;
+	margin-left: 0.75em;
+}
+
+/* Items per page */
+.kkos-show-per-page-area {
+	float:left;;
+}
+
+.kkos-show-per-page {
+	margin-right: 5px;
+}
+
+/* Product section */
+
+.kkos-text-link {
+	color: #1a6baa !important;
+	cursor:pointer;
+}
+
+.kkos-text-link:hover{
+	color: #1a6baa;
+}
+
+.kkos-option{
+	float: left;
+	font-size: 11px;
+	margin-top: 10px;
+	padding: 0 5px;
+}
+
+.kkos-all-orders {
+	border-top: 1px solid #dadada;
+	overflow: hidden;	
+}
+
+.kkos-all-orders .fa {
+	color: #134c78;
+	font-size: 1.35em;
+	margin: 0 0.45em;
+}
+
+
+.kkos-all-orders-icons{
+	text-align: right;
+}
+
+.kkos-all-orders-icons a:hover {
+	text-decoration: none;
+}
+
+.kkos-all-orders table{
+	border-collapse: collapse;
+	color: #333;
+	float: left;
+	font-size: 1em;
+	margin: 0 0 10px 0;
+	text-align: left;
+	width: 100%;
+}
+
+.kkos-all-orders table thead td{
+	font-weight: bold;
+}
+
+.total-amount td{
+	font-weight: 600;
+	padding-top: 0.5em;
+}
+
+.kkos-order-action{
+	font-size: 11.5px;
+	text-align: right;
+}
+
+.kkos-wide-col{
+	width: 60%;
+}
+
+.kkos-narrow-col{
+	width: 15% !important;
+}
+
+#kkos-column-right a{
+	display: block;
+	margin: 0.35em 0;
+}
+
+.kkos-option{
+	float: left;
+	font-size: 11px;
+	margin-top: 10px;
+	padding: 0 5px;
+}
+
+.kkos-label{
+	color: #fff;
+	display: inline;
+	float: left;
+	font-size: 0.84615385em;
+	font-weight: bold;
+	line-break: 0;
+	margin: 5px 2px 0 0;
+	padding: 0 5px 2px 5px;
+	vertical-align: top;
+}
+
+.kkos-shipped{
+	background-color: #3a9f4b !important;
+}
+
+.kkos-pending{
+	background-color: #f08d00 !important;
+}

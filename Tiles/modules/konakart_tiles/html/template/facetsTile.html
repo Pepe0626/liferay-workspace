@@ -1,0 +1,126 @@
+<%
+//(c) 2015 DS Data Systems UK Ltd, All rights reserved.
+//
+//DS Data Systems and KonaKart and their respective logos, are
+//trademarks of DS Data Systems UK Ltd. All rights reserved.
+//
+//The information in this document is free software;you can redistribute
+//it and/or modify it under the terms of the GNU Lesser General Public
+//License as published by the Free Software Foundation; either
+//version 2.1 of the License, or (at your option) any later version.
+//
+//This software is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+//Lesser General Public License for more details.
+%>
+
+<%if (prodSearch.priceFrom != null && prodSearch.priceTo != null) {%>		
+	<%var symbol = "$";%>
+	<script>
+	    $(function() {
+	        $( "#kkft-price-range-slider" ).slider({
+	            range: true,
+	            min: <%=prodSearch.priceFrom.toFixed(2)%>,
+	            max: <%=prodSearch.priceTo.toFixed(2)%>,
+	            values: [ <%=prodSearch.priceFrom.toFixed(2)%>, <%=prodSearch.priceTo.toFixed(2)%> ],
+	            slide: function( event, ui ) {
+			        var min = ui.values[ 0 ];
+			        var max = ui.values[ 1 ];
+			        $( "#kkft-amount" ).html(kk.formatMoney(min) + " - " + kk.formatMoney(max));
+	            },
+		        stop: function( event, ui ) {
+					kk.filterByPrice(ui.values[ 0 ], ui.values[ 1 ]);
+		        }
+	        });
+	        
+	        var min = $( "#kkft-price-range-slider" ).slider( "values", 0 );
+	        var max = $( "#kkft-price-range-slider" ).slider( "values", 1 );
+	        $( "#kkft-amount" ).html(kk.formatMoney(min) + " - " + kk.formatMoney(max));
+	        
+	    });
+	</script> 
+<% } %>
+
+<div id="kkft-side-menu">	
+	<div class="kkft-side-menu-section">
+		<% if (cats != null && cats.length > 0){%>					
+			<h1><%=getMsg("facets.tile.categories")%></h1>
+			<ul>				
+			<% for (var i = 0; i < cats.length; i++){ %>
+				<% var cat = cats[i];%>
+				<% var name = (cat.numberOfProducts < 0)? cat.name : cat.name+" ("+cat.numberOfProducts+")"; %>
+				<li>
+				<%for (var j = 0; j < cat.level; j++){%>
+					<span class='fa fa-angle-right'></span>
+				<% }%>	
+				<%if (cat.selected == true){ %>		
+					<a href='#' class="kkft-cat kkft-current-cat" id="kkft-<%=cat.id%>"><%=name%></a>
+				<% } else { %>
+					<a href='#' class="kkft-cat" id="kkft-<%=cat.id%>"><%=name%></a>
+				<% } %>	
+				</li>
+			<% } %>
+			</ul>
+		<% } %>
+		<%var haveManus = (manus !=null && manus.length > 0)? true : false;%>
+		<%var haveFacets = (prodSearch.tagGroups !=null && prodSearch.tagGroups.length > 0)? true : false;%>
+		<%var havePriceSlider = prodSearch.priceFrom != null && prodSearch.priceTo != null;%>
+		<%if (haveManus || haveFacets) {%>
+			<h1>
+				<%=getMsg("facets.tile.refine.search")%></h1>	
+			</h1>
+	    <% } %>		
+		<%if (numSelectedFilters > 0){%>					
+			<div id="kkft-remove-all"><img  src="<%=imageBase%>/x-button.png"><a href='#'><%=getMsg("facets.tile.clear.filters")%></a></div>				
+		<%}%>
+		<%if (haveManus){ %>
+			<div class="kkft-side-menu-section">
+				<h2><%=getMsg("facets.tile.manufacturers")%></h2>	
+				<ul>				
+					<% for (var i = 0; i < manus.length; i++){ %>
+						<% var manu = manus[i];%>
+						<% var name = manu.name+" ("+manu.numberOfProducts+")"; %>
+						<%if ( manu.id == prodSearch.manufacturerId) { %>
+							<li><a href='#' class="kkft-manu" id="kkft-<%=manu.id%>"><span class="kk-selected"></span><%=name%></a></li>	
+						<% } else { %>
+							<li><a href='#' class="kkft-manu" id="kkft-<%=manu.id%>"><span class="kk-not-selected"></span><%=name%></a></li>	
+						<% } %>
+					<% } %>
+				</ul>
+			</div>
+		<% } %>				
+		<%if (havePriceSlider){ %>
+					<div id="kkft-price" class="kkft-range-slider">
+		    			<h2><%=getMsg("facets.tile.price")%></h2>
+						<div id="kkft-price-range-slider"></div>
+						<div id="kkft-amount"></div>
+	    			</div>
+		<% } %>				
+		<%if (haveFacets){ %>
+			<div class="kkft-side-menu-section">
+			<% var previousName=""; %>
+			<% for (var i = 0; i < prodSearch.tagGroups.length; i++){ %>
+				<% var tagGroup = prodSearch.tagGroups[i];%>
+				<%if (tagGroup.name != null && previousName != null && !(tagGroup.name == previousName)){ %>
+					<h2><%=tagGroup.name%></h2>
+				<% } %>
+				<% previousName = tagGroup.name; %>
+				<%if (tagGroup.tags != null && tagGroup.tags.length > 0){ %>
+					<ul>
+					<% for (var j = 0; j < tagGroup.tags.length; j++){ %>
+						<% var tag = tagGroup.tags[j];%>
+						<%var name = tag.name; %>
+						<%if ( tag.selected == true) { %>
+							<li><a href='#' class="kkft-tag" id="kkft-<%=tag.id%>"><span class="kk-selected"></span><%=getMsg(name)+" ("+tag.numProducts+")"%></a></li>
+						<% } else { %>
+							<li><a href='#' class="kkft-tag" id="kkft-<%=tag.id%>"><span class="kk-not-selected"></span><%=getMsg(name)+" ("+tag.numProducts+")"%></a></li>
+						<% } %>
+					<% } %>
+					</ul>
+				<% } %>
+			<% } %>	
+			</div>
+		<% } %>		
+	</div>
+</div>

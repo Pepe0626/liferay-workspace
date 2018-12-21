@@ -1,0 +1,10 @@
+package konakart.banners.constants;
+
+/**
+ * @author Antonio
+ */
+public class KonakartBannersPortletKeys {
+
+	public static final String KonakartBanners = "konakartbanners";
+
+}

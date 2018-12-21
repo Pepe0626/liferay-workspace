@@ -1,0 +1,299 @@
+/*
+# (c) 2015 DS Data Systems UK Ltd, All rights reserved.
+#
+# DS Data Systems and KonaKart and their respective logos, are 
+# trademarks of DS Data Systems UK Ltd. All rights reserved.
+#
+# The information in this document below this text is free software; you can redistribute 
+# it and/or modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+# 
+# This software is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+*/
+
+/* General styling */
+body{
+	font: 13px 'Open Sans', sans-serif;
+	margin: 0;
+	-webkit-text-size-adjust: none;
+	background-color: #eff0f1;
+	color: #333;	
+}
+
+/* General styling for links */	
+body a {
+	color: #333;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+body a:hover {
+	color: #333;
+	text-decoration: underline;
+}
+
+#kk-page-container{
+	overflow: hidden;
+}
+
+#kk-page{
+	margin: 0 auto;
+	max-width: 945px;
+	overflow: hidden;
+}
+
+#kk-top-bar-container{	
+	border-bottom: 1px solid #e5e5e5;
+	position: fixed;
+	width: 100%;	
+	max-width: 945px;
+	z-index: 200000;	
+	background-color: #eff0f1;		
+}
+
+#kk-portlet-body #kk-top-bar-container{
+	border-bottom: 1px solid #ffffff !important;	
+	position: static !important;	
+}
+
+#kk-top-bar{
+	background-color: #fff;
+	display: block;
+	font-size: 10.5px;
+	margin: 0 auto;
+	overflow: visible; 
+	padding: 8px 2.5%;
+	position: relative;
+	max-width: 945px;
+	height: 1.65em;
+	text-align: right;
+}
+
+#kk-top-bar #kk-options-container{
+	display: inline-block;
+}
+
+#kk-options{
+	position: relative;
+	z-index: 1000000;
+}
+
+.kk-content-area{
+	background-color: #fff;
+	overflow: hidden;
+	padding: 2.5%;
+	width: 95%;
+}
+
+#kk-content.wide{
+	width: 100%;
+}
+
+#kk-content.narrow{
+	margin-top: 10px;
+	overflow: hidden;
+	max-width: 760px;
+	width: 81%;
+}
+
+#kk-account-link {
+	margin-left: 11px;
+	float: right;
+}
+
+#kk-logout-link {
+	margin-left: 11px;
+	float: right;
+}
+
+#kk-popup-wishList-tile {
+	float: right;
+}
+
+#kk-popup-cart-tile {
+	float: right;
+}
+
+/*
+* Table column alignment
+*/
+td.kk-right {
+	text-align:right;
+}
+
+td.kk-center {
+	text-align:center;
+}
+
+/* Styling for Rounded Corners */
+
+.kk-rounded-corners {
+ 	behavior: url('../script/pie/PIE.htc');
+     -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -khtml-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.kk-rounded-corners-top {
+ 	behavior: url('../script/pie/PIE.htc');
+     -moz-border-radius: 10px 10px 0 0;
+    -webkit-border-radius: 10px 10px 0 0;
+    -khtml-border-radius:  10px 10px 0 0;
+    border-radius: 10px 10px 0 0;
+}
+
+.kk-rounded-corners-bottom {
+ 	behavior: url('../script/pie/PIE.htc');
+     -moz-border-radius: 0 0 10px 10px;
+    -webkit-border-radius: 0 0 10px 10px;
+    -khtml-border-radius:  0 0 10px 10px;
+    border-radius: 0 0 10px 10px;
+}
+
+.kk-rounded-corners-left {
+  	behavior: url('../script/pie/PIE.htc');
+     -moz-border-radius: 10px 0 0 10px;
+    -webkit-border-radius: 10px 0 0 10px;
+    -khtml-border-radius: 10px 0 0 10px;
+    border-radius: 10px 0 0 10px;
+}
+
+.kk-rounded-corners-right {
+ 	behavior: url('../script/pie/PIE.htc');
+     -moz-border-radius: 0 10px 10px 0;
+    -webkit-border-radius: 0 10px 10px 0;
+    -khtml-border-radius:  0 10px 10px 0;
+    border-radius: 0 10px 10px 0;
+}
+
+.kk-small-rounded-corners {
+ 	behavior: url('../script/pie/PIE.htc');
+     -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    -khtml-border-radius: 7px;
+    border-radius: 7px;
+}
+
+.kk-small-rounded-corners-top {
+ 	behavior: url('../script/pie/PIE.htc');
+     -moz-border-radius: 7px 7px 0 0;
+    -webkit-border-radius: 7px 7px 0 0;
+    -khtml-border-radius:  7px 7px 0 0;
+    border-radius: 7px 7px 0 0;
+}	
+
+
+/* Center elements with dynamic width */
+.kk-centered{
+	display: table;
+	margin: 0 auto;
+	text-align: center;
+}	
+
+/* Buttons */
+.kk-button, .kk-button-small, .kk-button-medium {
+	background: #3689c9;
+	color: #fff;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+.kk-button {
+	font-size:0.88em;
+	padding: 5px 15px;
+}
+
+.kk-button-small{
+	font-size: 9px;
+	padding: 2px 5px;
+}
+
+.kk-button-medium {
+	font-size: 9px;
+	padding: 3px 7px;
+}
+
+.kk-button:hover, .kk-button-small:hover, .kk-button-medium:hover{
+	text-decoration: none;
+	color: #fff;
+	background-color: #2372b0;
+	cursor: pointer;
+}
+
+.kk-button-right{
+	float: right;
+}
+
+/* Selected */
+.kk-selected, .kk-not-selected {
+	display: inline-block;
+	margin-right: 4px;
+	height: 10px;
+	width: 10px;
+}
+
+.kk-selected {
+	background-image: url('../images/selected.png');
+}
+
+.kk-not-selected {
+	background-image: url('../images/not-selected.png');
+}
+
+/* Loading */
+
+.kk-modal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000000000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 150, 150, 150, .3 ) 
+                url('../images/loader_large.gif')
+                50% 50% 
+                no-repeat;
+}
+
+
+/* Anytime the body has the loading class, our
+   modal element will be visible */
+body.kk-loading .kk-modal {
+    display: block;
+}
+
+.kk-button-loading {
+	background-image:url('../images/loader.gif');
+	background-repeat: no-repeat;
+    background-position: center center;
+    height: 16px;
+	width: 16px;
+	margin: 0 20px;
+}
+
+.kk-spinner-large {
+	background-image:url('../images/loader_large.gif');
+	background-repeat: no-repeat;
+    background-position: center center;
+    height: 50px;
+	width: 100%;
+	display: inline-block;
+}
+
+.kk-spinner-small {
+	background-image:url('../images/loader.gif');
+	background-repeat: no-repeat;
+    background-position: center center;
+    height: 16px;
+	width: 100%;
+	display: inline-block;
+}
+
+

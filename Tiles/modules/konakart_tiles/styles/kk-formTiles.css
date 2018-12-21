@@ -1,0 +1,159 @@
+/*
+# (c) 2015 DS Data Systems UK Ltd, All rights reserved.
+#
+# DS Data Systems and KonaKart and their respective logos, are 
+# trademarks of DS Data Systems UK Ltd. All rights reserved.
+#
+# The information in this document below this text is free software; you can redistribute 
+# it and/or modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+# 
+# This software is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+*/
+
+.kk-form-input{
+	height: 22px;
+	line-height: 15px;
+	display: table-row;
+}
+
+.kk-form-section{
+	display: table;
+	width: 100%;
+}
+
+.kk-form-section label{
+	display: table-cell;
+	float: left;
+	padding: 0.25em 2.5% 0 0;
+	width: 40%;
+}
+
+.kk-form-section  input[type="text"], .kk-form-section input[type="password"]{
+	float: left;
+}
+
+.kk-form-section input[type="text"], .kk-form-section input[type="password"], .kk-form-section select, .kk-form-section textarea {
+	background-color: #f7f7f7;
+	border: 1px solid #bfbfbf;
+	display: table-cell;
+	width: 47.5%;
+}
+
+.kk-form-section .kk-validation-msg {
+	margin-left:10px;
+	float: left;
+	width: 100%;
+	color: #A00000;
+}
+
+.kk-form-section .kk-validation-msg {
+	margin-left:10px;
+	float: left;
+	width: 100%;
+	color: #A00000;
+}
+
+.kk-form-section-title{
+	border-bottom: 1px solid #d8d8d8;
+	margin-bottom: 10px;
+}
+
+.kk-form-section-title .no-margin{
+	border-bottom: 1px solid #d8d8d8;
+}
+
+#kk-error{
+	color: #A00000;
+}
+
+#kk-message{
+	color: #00A000;
+}
+
+.kk-required-text{
+	float:right;
+	text-decoration: none;
+	font-size: 11px;
+	font-weight: normal;	
+}
+
+.kk-form-section-divider{
+	border-top: 1px solid #d8d8d8;
+	padding: 5px 0;
+}
+
+.kk-form-section-fields{
+	display: table;
+	width: 100%;
+}
+
+.kk-required-blue, .kk-required-green{
+	float: right;
+	height: 13px;
+	margin: 3px 0 0 5px;
+	width: 13px;
+}
+
+.kk-required-blue{
+	background-image: url('../images/required-blue.png');
+}
+
+.kk-required-green{
+	background-image: url('../images/required-green.png');
+}
+
+.kk-radio-button{
+	float: left;
+	width: 24.25%
+}
+
+.kk-form-buttons {
+	border-top: 1px solid #d8d8d8;
+	margin-top:10px;
+	padding: 10px 0;
+	width: 100%;
+}
+
+.kk-continue-button{
+	float: right;
+	font-weight: normal;
+}
+
+.kk-form-buttons, .kk-form-buttons-wide {
+	border-top: 1px solid #d8d8d8;
+	margin-top:10px;
+	padding: 10px 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

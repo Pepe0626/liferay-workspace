@@ -1,0 +1,113 @@
+<%
+//(c) 2015 DS Data Systems UK Ltd, All rights reserved.
+//
+//DS Data Systems and KonaKart and their respective logos, are
+//trademarks of DS Data Systems UK Ltd. All rights reserved.
+//
+//The information in this document is free software;you can redistribute
+//it and/or modify it under the terms of the GNU Lesser General Public
+//License as published by the Free Software Foundation; either
+//version 2.1 of the License, or (at your option) any later version.
+//
+//This software is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+//Lesser General Public License for more details.
+%>
+
+<h1 id="kk-page-title"><%=getMsg("edit.wishlist.tile.editwishlist")%></h1>
+<div id="kkmwt-container" class="kk-content-area kk-rounded-corners">
+	<%if (numItems == 0){ %>
+		<p><%=getMsg("wishlist.tile.empty")%></p>
+	<% } else { %>	
+		<% var outOfStock=false; %>	
+		<table>
+			<thead>
+				<tr>
+					<td id="kkmwt-image-col"><%=getMsg("edit.wishlist.tile.item")%></td>
+					<td id="kkmwt-item-col"></td>
+					<td id="kkmwt-priority-col"><%=getMsg("edit.wishlist.tile.priority")%></td>
+					<td id="kkmwt-price-col"><%=getMsg("edit.wishlist.tile.price")%></td>
+					<td id="kkmwt-add-to-cart-col"></td>
+					<td id="kkmwt-remove-col"></td>								
+				</tr>
+			</thead>
+			<tbody>
+				<% for (var k = 0; k < wishListItems.length; k++){ %>
+					<% var item = wishListItems[k];%>				
+					<tr>
+						<td class="product-image-td">
+							<img class="kkmwt-product-image" id='<%="kkmwt-"+item.product.id%>' src="<%=item.prodImage%>" border="0" alt="<%=item.product.name%>" title=" <%=item.product.name%> ">
+						</td>
+						<td>		    								
+							<a href='#' class="kkmwt-text-link" id='<%="kkmwt-"+item.product.id%>'><%=item.product.name%>
+								<%if (item.opts != null && item.opts.length > 0) {%>
+									<%for ( var j = 0; j < item.opts.length; j++) {%>
+										<%var opt = item.opts[j];%>
+										<%if (opt.type == 0) {%> 
+											<br><span class="kkwt-wishList-item-option"> - <%=opt.name%>:&nbsp;<%=opt.value%></span>
+										<%} else if (opt.type == 1) {%> 
+											<br><span class="kkwt-wishList-item-option"> - <%=opt.name%>:&nbsp;<%=opt.quantity%>&nbsp;<%=opt.value%></span>
+										<%} else if (opt.type == 2) {%> 
+											<br><span class="kkwt-wishList-item-option"> - <%=opt.name%>:&nbsp;<%=opt.formattedCustPrice%></span>
+										<%} else if (opt.type == 3 && !isWishList) {%> 
+											<br><span class="kkwt-wishList-item-option"> - <%=opt.name%>:&nbsp;<%=opt.customerText%></span>
+										<%}%>					
+									<%}%>
+								<%}%>
+							</a>
+						</td>
+						<td>
+							<select  id='<%=item.id + "-P"%>' onchange="kk.changeWishListPriority('<%=item.id+"-P"%>')">
+								<option value="5" <%=(item.priority==5)?"selected='selected'":""%>><%=getMsg("edit.wishlist.tile.highest")%></option>
+								<option value="4" <%=(item.priority==4)?"selected='selected'":""%>><%=getMsg("edit.wishlist.tile.high")%></option>
+								<option value="3" <%=(item.priority==3)?"selected='selected'":""%>><%=getMsg("edit.wishlist.tile.medium")%></option>
+								<option value="2" <%=(item.priority==2)?"selected='selected'":""%>><%=getMsg("edit.wishlist.tile.low")%></option>
+								<option value="1" <%=(item.priority==1)?"selected='selected'":""%>><%=getMsg("edit.wishlist.tile.lowest")%></option>
+							</select>
+						</td>
+						<td class="kk-right">
+							<%if (displayPriceWithTax){%>
+								<%=formatMoney(item.finalPriceIncTax)%>
+							<%}else{%>
+								<%=formatMoney(item.finalPriceExTax)%>
+							<%}%>		    																		
+						</td>	    							
+						<td class="kk-center">
+							<a href='#' id='<%="kkmwt-"+item.id%>' class="kkmwt-add-to-cart kk-button-small kk-small-rounded-corners"><%=getMsg("edit.wishlist.tile.add.to.cart")%></a>
+						</td>
+						<td class="kk-right">
+							<a id='<%="kkmwt-"+item.id%>' class="kkmwt-remove fa fa-times-circle" href='#' title='<%=getMsg("edit.wishlist.tile.remove.item")%>'></a>
+						</td>
+					</tr>
+				<%}%>
+				<tr>
+					<td colspan="2">
+					</td>	    							
+					<td id="kkmwt-cost-overview" colspan="3">
+						<table>    									
+							<tr>
+								<td class="kkmwt-cost-overview-labels">
+									<%=getMsg("edit.wishlist.tile.total")%>:
+								</td>
+								<td class="kkmwt-cost-overview-amounts">
+									<%if (displayPriceWithTax){%>									
+										<%=formatMoney(wishList.finalPriceIncTax)%>
+									<%}else{%>
+										<%=formatMoney(wishList.finalPriceExTax)%>
+									<%}%>		    																		
+								</td>
+							</tr>		    																		
+						</table>										
+					</td>
+					<td></td>
+				</tr>	    									
+			</tbody>	    				
+		</table>
+		<!-- 
+		<div >
+			<a  id="kkmwt-continue-button" class="kk-button kk-small-rounded-corners"><span><%=getMsg("edit.wishlist.tile.continue")%></span></a>						
+		</div>
+		 -->
+	<% } %>
+</div>

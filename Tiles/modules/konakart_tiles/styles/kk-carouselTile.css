@@ -1,0 +1,59 @@
+/*
+# (c) 2015 DS Data Systems UK Ltd, All rights reserved.
+#
+# DS Data Systems and KonaKart and their respective logos, are 
+# trademarks of DS Data Systems UK Ltd. All rights reserved.
+#
+# The information in this document below this text is free software; you can redistribute 
+# it and/or modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+# 
+# This software is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+*/
+.kkca-item-area{
+	background: #fff;
+	margin-top: 1em;
+	display: inline-block;
+	overflow: hidden;
+}
+
+.kkca-item-area.wide{
+	width: 100%;
+}
+
+.kkca-item-area-title{
+	float: left;
+	font-size: 12px;
+	margin: 0;
+	padding: 0.75em;
+	text-transform: uppercase;
+}
+
+.kkca-item-area-header {
+	height: auto;
+	overflow: hidden;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.kkca-item-area-navigation{
+	float: right;
+}
+
+.kkca-item-area-navigation .kkca-all-items{
+	color: #000;
+	float: left;
+	font-size: 11.5px;
+	margin-right: 10px;
+	padding: 10px 0;
+	text-decoration: none;
+}
+
+.kkca-items{
+	overflow: hidden;
+	padding: 0px;
+}

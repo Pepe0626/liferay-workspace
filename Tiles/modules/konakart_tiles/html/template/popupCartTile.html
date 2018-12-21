@@ -1,0 +1,79 @@
+<%
+//(c) 2015 DS Data Systems UK Ltd, All rights reserved.
+//
+//DS Data Systems and KonaKart and their respective logos, are
+//trademarks of DS Data Systems UK Ltd. All rights reserved.
+//
+//The information in this document is free software;you can redistribute
+//it and/or modify it under the terms of the GNU Lesser General Public
+//License as published by the Free Software Foundation; either
+//version 2.1 of the License, or (at your option) any later version.
+//
+//This software is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+//Lesser General Public License for more details.
+%>
+
+<div id="kkpct-shopping-cart" class="kkpct-top-bar-menu-item">
+	<span id="kkpct-shopping-cart-link">
+		<%=getMsg("cart.tile.shoppingcart")%>
+		<span id="kkpct-basket-items"> 
+			<%if (numItems > 0) { %>
+				(<%=numItems%>)
+			<%}%>
+		</span>
+	</span>
+	<div id="kkpct-shopping-cart-container">
+		<div id="kkpct-shopping-cart-mouseover-shadow" class="kkpct-slide-out-shadow"></div>
+		<div id="kkpct-shopping-cart-contents" class="kkpct-slide-out-contents kkpct-shadow">
+			<%if (basketItems==null || basketItems.length == 0) { %>
+				<%=getMsg("cart.tile.empty")%>
+			<%}else{%>
+				<div id="kkpct-shopping-cart-items">
+					<% for (var i = 0; i < basketItems.length; i++){ %>
+						<% var item = basketItems[i];%>
+						<%if (item.product != null) { %>
+							<div class="kkpct-shopping-cart-item">
+								<a href='#' class="kkpct-cart-item-image" id='<%="kkpct-"+item.product.id%>'><img src="<%=item.prodImage%>" border="0" alt="<%=item.product.name%>" title=" <%=item.product.name%> "></a>
+								<a href='#' class="kkpct-shopping-cart-item-title" id='<%="kkpct-"+item.product.id%>'><%=item.product.name%></a>
+
+								<%if (item.opts != null && item.opts.length > 0) {%>
+									<%for ( var j = 0; j < item.opts.length; j++) {%>
+										<%var opt = item.opts[j];%>
+										<%if (opt.type == 0) {%> 
+											<br><span class="kkct-shopping-cart-item-option"> - <%=opt.name%>:&nbsp;<%=opt.value%></span>
+										<%} else if (opt.type == 1) {%> 
+											<br><span class="kkct-shopping-cart-item-option"> - <%=opt.name%>:&nbsp;<%=opt.quantity%>&nbsp;<%=opt.value%></span>
+										<%} else if (opt.type == 2) {%> 
+											<br><span class="kkct-shopping-cart-item-option"> - <%=opt.name%>:&nbsp;<%=formatMoney(opt.customerPrice)%></span>
+										<%} else if (opt.type == 3) {%> 
+											<br><span class="kkct-shopping-cart-item-option"> - <%=opt.name%>:&nbsp;<%=opt.customerText%></span>
+										<%}%>					
+									<%}%>
+								<%}%>
+
+								<div class="kkpct-shopping-cart-item-price">
+									<%if (displayPriceWithTax) { %>		
+										<%=formatMoney(item.finalPriceIncTax)%>
+									<%}else{%>
+										<%=formatMoney(item.finalPriceExTax)%>
+									<%}%>
+									&nbsp;<%=getMsg("cart.tile.quantity")%>:<%=item.quantity%>
+								</div>
+							</div>
+						<%}%>
+					<%}%>
+				</div>
+				<div id="kkpct-subtotal-and-checkout">
+					<div class="kkpct-subtotal">
+						<div class="kkpct-subtotal-label"><%=getMsg("cart.tile.subtotal")%></div>
+						<div class="kkpct-subtotal-amount"><%=formatMoney(basketTotal)%></div>
+						<div id="kkpct-shopping-cart-checkout-button" class="kk-button kk-small-rounded-corners"><%=getMsg("cart.tile.checkout")%></div>
+					</div>
+				</div>
+			<%}%>
+		</div>
+	</div>	
+</div>
+

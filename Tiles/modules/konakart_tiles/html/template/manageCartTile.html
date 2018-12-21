@@ -1,0 +1,165 @@
+<%
+//(c) 2015 DS Data Systems UK Ltd, All rights reserved.
+//
+//DS Data Systems and KonaKart and their respective logos, are
+//trademarks of DS Data Systems UK Ltd. All rights reserved.
+//
+//The information in this document is free software;you can redistribute
+//it and/or modify it under the terms of the GNU Lesser General Public
+//License as published by the Free Software Foundation; either
+//version 2.1 of the License, or (at your option) any later version.
+//
+//This software is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+//Lesser General Public License for more details.
+%>
+
+<h1 id="kk-page-title"><%=getMsg("edit.cart.tile.editcart")%></h1>
+<div id="kkmct-container" class="kk-content-area kk-rounded-corners">
+	<%if (numItems == 0){ %>
+		<p><%=getMsg("edit.cart.tile.emptycart")%></p>
+	<% } else { %>	
+		<% var outOfStock=false; %>	
+		<form action="#" id="kk-manage-cart-form" method="post" class="kk-form-section"> 
+			<table>
+				<thead>
+					<tr>
+						<td></td>
+						<td class="kkmct-narrow-col"><%=getMsg("edit.cart.tile.item")%></td>
+						<td class="kkmct-wide-col"></td>								
+						<td class="kkmct-narrow-col kk-right"><%=getMsg("edit.cart.tile.price")%></td>
+						<td class="kkmct-narrow-col kk-right"><%=getMsg("edit.cart.tile.total")%></td>
+						<td class="kkmct-narrow-col kk-center"></td>
+					</tr>
+				</thead>
+				<tbody>
+					<% for (var k = 0; k < basketItems.length; k++){ %>
+						<% var item = basketItems[k];%>
+						<tr>
+							<td>
+								<%if ((item.quantity > item.quantityInStock)) { %>
+										<div class="kkmct-items-left kkmct-red"><%=getMsg("edit.cart.tile.out.of.stock")%></div>
+										<% outOfStock=true; %>
+								<% } %>
+							</td>
+							<td>
+								<img class="kkmct-product-image" id='<%="kkmct-"+item.product.id%>' src="<%=item.prodImage%>" border="0" alt="<%=item.product.name%>" title=" <%=item.product.name%> ">
+							</td>
+							<td>		    								
+								<a href='#' class="kkmct-text-link" id='<%="kkmct-"+item.product.id%>'><%=item.product.name%>
+									<%if (item.opts != null && item.opts.length > 0) {%>
+										<%for ( var j = 0; j < item.opts.length; j++) {%>
+											<%var opt = item.opts[j];%>
+											<%if (opt.type == 0) {%> 
+												<br><span class="kkct-shopping-cart-item-option"> - <%=opt.name%>:&nbsp;<%=opt.value%></span>
+											<%} else if (opt.type == 1) {%> 
+												<br><span class="kkct-shopping-cart-item-option"> - <%=opt.name%>:&nbsp;<%=opt.quantity%>&nbsp;<%=opt.value%></span>
+											<%} else if (opt.type == 2) {%> 
+												<br><span class="kkct-shopping-cart-item-option"> - <%=opt.name%>:&nbsp;<%=formatMoney(opt.customerPrice)%></span>
+											<%} else if (opt.type == 3) {%> 
+												<br><span class="kkct-shopping-cart-item-option"> - <%=opt.name%>:&nbsp;<%=opt.customerText%></span>
+											<%}%>					
+										<%}%>
+									<%}%>
+								</a>
+								<input type="text" class="kkmct-qty-input" name="prodQty" id="kkmctq-<%=item.id%>" value="<%=item.quantity%>">
+								<a id='<%="kkmctb-"+item.id%>' class="kkmct-update-qty kkmct-update-button kk-small-rounded-corners"><%=getMsg("edit.cart.tile.update")%></a>
+							</td>
+						
+							<%if (item.finalPriceIncTax != null && displayPriceWithTax){ %>				    					
+								<td class="kk-right">
+									<%if (item.quantity>0){ %>
+										<%=formatMoney(item.finalPriceIncTax / item.quantity)%>
+									<% } %>
+								</td>
+								<td class="kkmct-total-price kk-right"><%=formatMoney(item.finalPriceIncTax)%></td>	
+							<% } %>							
+							<%if (item.finalPriceExTax != null && !displayPriceWithTax){ %>
+								<td class="kk-right">
+									<%if (item.quantity>0){ %>
+										<%=formatMoney(item.finalPriceExTax / item.quantity)%>
+									<% } %>
+								</td>
+								<td class="kkmct-total-price kk-right"><%=formatMoney(item.finalPriceExTax)%></td>
+							<% } %>		    							
+							<td class="center"><a class="kkmct-remove fa fa-times-circle" id='<%="kkmct-"+item.id%>' href='#' title='<%=getMsg("edit.cart.tile.remove.item")%>'></a></td>
+						</tr>
+					<%}%>				
+					<tr>
+						<td id="kkmct-promotion-codes" colspan="3">
+							<div id="kkmct-promotion-codes-container">
+								<%if (displayCouponEntry == true) { %>
+									<div class="kkmct-promotion-codes-field">				
+										<label><%=getMsg("edit.cart.tile.couponcode")%></label>
+										<input type="text" name="kkCouponCode" id="kkCouponCode" value='<%=couponCode%>'/>
+										<a id="kkmct-couponCodeUpdate" class="kkmct-update-button kk-small-rounded-corners"><%=getMsg("edit.cart.tile.update")%></a>
+										<span class="kk-validation-msg"></span>
+									</div>
+								<% } %>
+								<%if (displayGiftCertificateEntry == true) { %>
+									<div class="kkmct-promotion-codes-field">				
+										<label><%=getMsg("edit.cart.tile.giftcertcode")%></label>
+										<input type="text" name="kkGiftCertCode" id="kkGiftCertCode" value='<%=giftCertCode%>'/>
+										<a id="kkmct-giftCertCodeUpdate" class="kkmct-update-button kk-small-rounded-corners"><%=getMsg("edit.cart.tile.update")%></a>
+										<span class="kk-validation-msg"></span>
+									</div>
+								<% } %>
+							</div>
+						</td>
+					</tr>	    							
+					<tr>
+						<td colspan="3">
+						</td>	    							
+						<td colspan="3">
+							<%if (checkoutOrder != null){ %>
+								<%if (checkoutOrder.orderTotals != null && checkoutOrder.orderTotals.length > 0 ){ %>
+									<table id="kkmct-cost-overview">    									
+										<% for (var j = 0; j < checkoutOrder.orderTotals.length; j++){ %>
+											<tr>
+												<% var ot = checkoutOrder.orderTotals[j];%>
+												<td class="kkmct-cost-overview-labels">
+													<% if (isDiscountModule(ot.className)) {%>																
+														<span class="kkmct-discount"><%=ot.title%></span><br/>
+													<%}else{%>																
+														<%=ot.title%><br/>
+													<%}%>
+												</td>
+												<td class="kkmct-cost-overview-amounts kk-right">
+													<%if (ot.className == "ot_reward_points" || ot.className == "ot_product_reward_points") {%>
+														<%=ot.value%><br/>
+													<%}else if (ot.className == "ot_free_product"){%>
+														<%=ot.text%><br/>
+													<%}else if (isDiscountModule(ot.className)) {%>														
+														<span class="kkmct-discount">-<%=formatMoney(ot.value)%></span><br/>
+													<%}else{%>																
+														<%=formatMoney(ot.value)%><br/>
+													<%}%>
+												</td>
+											</tr>		    																		
+										<% } %>
+									</table>										
+								<% } %>
+							<% } else { %>
+								<table>    									
+									<tr>
+										<td class="kkmct-cost-overview-labels">
+											<%=getMsg("cart.tile.subtotal")%>:
+										</td>
+										<td class="kkmct-cost-overview-amounts">
+											<%=formatMoney(basketTotal)%>
+										</td>
+									</tr>		    																		
+								</table>										
+							<% } %>
+						</td>
+						<td></td>
+					</tr>	    						
+				</tbody>	    				
+			</table>
+		</form>
+		<div >
+			<a  id="kkmct-checkout-button" class="kk-button kk-small-rounded-corners"><span><%=getMsg("cart.tile.checkout")%></span></a>						
+		</div>
+	<% } %>
+</div>

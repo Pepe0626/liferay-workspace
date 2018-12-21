@@ -1,0 +1,73 @@
+<%
+//(c) 2015 DS Data Systems UK Ltd, All rights reserved.
+//
+//DS Data Systems and KonaKart and their respective logos, are
+//trademarks of DS Data Systems UK Ltd. All rights reserved.
+//
+//The information in this document is free software;you can redistribute
+//it and/or modify it under the terms of the GNU Lesser General Public
+//License as published by the Free Software Foundation; either
+//version 2.1 of the License, or (at your option) any later version.
+//
+//This software is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+//Lesser General Public License for more details.
+%>
+<h1 id="kk-page-title"><%=getMsg("customer.info.prod.notify.prodnots")%></h1>			
+<div class="kk-content-area kk-rounded-corners">
+	<div id="kk-product-notifications">
+		<form action="#" id="kk-product-notification-form" method="post">
+			<div class="kk-form-section">
+				<div class="notification-header">
+					<%=getMsg("customer.info.prod.notify.info")%>.
+				</div>
+			</div>
+			<div class="kk-form-section">							
+				<div class="kk-form-section-title">
+					<h3><%=getMsg("customer.info.prod.notify.gprodnots")%></h3>							
+				</div>
+				
+				<div class="kk-notification-header">
+					<div class="kk-notification-checkbox">
+						<% if (customer.globalProdNotifier >= 1){ %>
+							<input type="checkbox" id="kkGlobalNotification" name="kkGlobalNotification" checked>
+						<%} else { %>
+							<input type="checkbox" id="kkGlobalNotification" name="kkGlobalNotification">
+						<%}%>
+					</div>
+					<div class="kk-notification-explanation">										
+						<%=getMsg("customer.info.prod.notify.recprodnots")%>.
+					</div>
+				</div>
+			</div>
+			<%if (customer.globalProdNotifier < 1) { %>
+				<div class="kk-form-section">	
+					<div class="kk-form-section-title">
+						<h3><%=getMsg("customer.info.prod.notify.prodnots")%></h3>	
+					</div>
+					<%if (customer.productNotifications != null && customer.productNotifications.length > 0){ %>	
+						<h4><%=getMsg("customer.info.prod.notify.remprodnots")%>.</h4>			
+						<div class="kk-notification-header">
+						<% for (var i = 0; i < customer.productNotifications.length; i++){ %>
+							<%var prod = customer.productNotifications[i];%>
+							<div class="kk-select-notified-prod-section">
+								<div class="kk-notification-checkbox <%=(i%2==0)?"even":"odd"%>"><input type="checkbox" class="kkpn-products" id='<%="kkpn-"+prod.id%>'/></div>
+								<div class="kk-notification-explanation <%=(i%2==0)?"even":"odd"%>"><%=prod.name%></div>
+							</div>
+						<% } %>
+						</div>
+					<% } else { %>
+						<div class="kk-notification-header">
+							<%=getMsg("customer.info.prod.notify.noprodnots")%>.
+						</div>
+					<% } %>	
+				</div>
+			<% } %>	
+			<div class="kk-form-buttons-wide">
+				<a id="kk-product-notification-submit" class="kk-continue-button kk-button kk-small-rounded-corners"><span><%=getMsg("customer.info.save")%></span></a>
+				<a  id="kk-cust-info-back" class="kk-button kk-small-rounded-corners"><span><%=getMsg("customer.info.back")%></span></a>
+			</div>
+		</form>
+	</div>
+</div>

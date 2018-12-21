@@ -1,0 +1,226 @@
+<%
+//(c) 2015 DS Data Systems UK Ltd, All rights reserved.
+//
+//DS Data Systems and KonaKart and their respective logos, are
+//trademarks of DS Data Systems UK Ltd. All rights reserved.
+//
+//The information in this document is free software;you can redistribute
+//it and/or modify it under the terms of the GNU Lesser General Public
+//License as published by the Free Software Foundation; either
+//version 2.1 of the License, or (at your option) any later version.
+//
+//This software is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+//Lesser General Public License for more details.
+%>
+<h1 id="kk-page-title"><%=getMsg("order.detail.tile.orderinformation",order.id,formatDate(order.datePurchased))%></h1>
+<div id="kkod-order-confirmation" class="kk-content-area kk-rounded-corners">
+	<div id="kkod-column-left">
+		<div id="kkod-delivery-address" class="kkod-area">
+			<div class="kkod-heading-container">
+				<h3><%=getMsg("order.detail.tile.deliveryaddress")%></h3>
+			</div>
+			<div class="kkod-area-content">
+				<span><%=removeCData(order.deliveryFormattedAddress)%></span>
+				<div id="kkod-shipping-info" class="kkod-area-content-select">
+					<label><%=getMsg("order.detail.tile.shippingmethod")%></label>
+					<p><%=order.shippingMethod%></p>
+				</div>
+			</div>
+		</div>
+		<div id="kkod-billing-address" class="kkod-area">
+			<div class="kkod-heading-container">
+				<h3><%=getMsg("order.detail.tile.billingaddress")%></h3>
+			</div>
+			<div class="kkod-area-content">
+				<span><%=removeCData(order.billingFormattedAddress)%></span>
+				<div id="kkod-payment-method" class="kkod-area-content-select">
+					<label><%=getMsg("order.detail.tile.paymentmethod")%></label>
+					<p><%=order.paymentMethod%></p>
+				</div>
+			</div>
+		</div>
+		<%if (order.orderShipments != null && order.orderShipments.length > 0){ %>
+			<div class="kkod-shipment-area">
+				<div class="kkod-heading-container">
+					<h3><%=getMsg("order.detail.tile.shipments")%></h3>
+				</div>
+				<div>
+					<% for (var i = 0; i < order.orderShipments.length; i++){ %>
+						<% var os = order.orderShipments[i];%>
+						<%if (i==order.orderShipments.length-1){ %>
+							<table class="kkod-shipment-container-no-border">
+						<%}else{%>
+							<table class="kkod-shipment-container">
+						<%}%>
+							<tbody>
+								<tr>
+									<td class="kkod-25-col"><span class="kkod-bold"><%=getMsg("order.detail.tile.date")%>:</span> <%=formatDate(os.dateAdded)%></td>
+									<td class="kkod-50-col">
+										<%if (os.shipperName != null && os.shipperName.length > 0){ %>
+											<span class="kkod-bold"><%=getMsg("order.detail.tile.shipper")%>:</span> <%=os.shipperName%>
+										<%}%>
+									</td>
+									<td class="kkod-25-col">
+										<%if (os.trackingURL != null && os.trackingURL.length > 0){ %>
+											<a class="kkod-text-link"  target="_blank" href="<%=os.trackingURL%>"><%=getMsg("order.detail.tile.track")%></a>
+										<%}%>
+									</td>
+								</tr>
+								<%if (os.shippedOrderProducts != null && os.shippedOrderProducts.length > 0){ %>
+									<tr>
+										<td colspan="3">
+											<table>
+												<thead>
+													<tr>
+														<td class="kkod-60-col"><%=getMsg("order.detail.tile.item")%></td>
+														<td class="kkod-40-col"><%=getMsg("order.detail.tile.qty.shipped")%></td>
+													</tr>
+												</thead>
+												<tbody>
+													<% for (var j = 0; j < os.shippedOrderProducts.length; j++){ %>
+														<% var osp = os.shippedOrderProducts[j];%>
+														<% var op = osp.orderProd;%>
+														<tr>
+															<td>
+																<a href='#' class="kkod-order-item-link kkod-text-link" id='<%="kkod-"+op.productId%>'><%=op.name%>
+																	<%if (op.opts != null && op.opts.length > 0) {%>
+																		<%for ( var k = 0; k < op.opts.length; k++) {%>
+																			<%var opt = op.opts[k];%>
+																			<%if (opt.type == 0) {%> 
+																				<br><span class="kkod-shopping-cart-item-option"> - <%=opt.name%>:&nbsp;<%=opt.value%></span>
+																			<%} else if (opt.type == 1) {%> 
+																				<br><span class="kkod-shopping-cart-item-option"> - <%=opt.name%>:&nbsp;<%=opt.quantity%>&nbsp;<%=opt.value%></span>
+																			<%} else if (opt.type == 2) {%> 
+																				<br><span class="kkod-shopping-cart-item-option"> - <%=opt.name%>:&nbsp;<%=formatMoney(opt.customerPrice)%></span>
+																			<%} else if (opt.type == 3) {%> 
+																				<br><span class="kkod-shopping-cart-item-option"> - <%=opt.name%>:&nbsp;<%=opt.customerText%></span>
+																			<%}%>
+																		<%}%>
+																	<%}%>
+																</a>
+															</td>
+															<td>
+																<%=osp.quantity%>
+															</td>
+														<tr>
+													<%}%>
+												</tbody>
+											</table>
+										</td>
+									</tr>
+								<%}%>
+							</tbody>
+						</table>
+					<%}%>
+				</div>
+			</div>
+		<%}%>
+		<div id="kkod-status-notes">
+			<div class="kkod-heading-container">
+				<h3><%=getMsg("order.detail.tile.orderhistory")%></h3>
+			</div>
+			<div>
+				<%if (order.statusTrail != null && order.statusTrail.length > 0){ %>
+					<table>
+					<% for (var i = 0; i < order.statusTrail.length; i++){ %>
+						<% var ost = order.statusTrail[i];%>
+						<tr>
+							<td><%=formatDate(ost.dateAdded)%></td>
+							<td><%=ost.orderStatus%></td>
+							<%if (ost.comments == null || ost.comments.length == 0){ %>
+								<td>&nbsp;</td>
+							<%}else{%>
+								<td><%=ost.comments%></td>
+							<%}%>
+						</tr>
+					<%}%>
+					</table>
+				<%}%>
+			</div>
+		</div>
+	</div>
+	<div id="kkod-column-right">
+		<div>
+			<div class="kkod-heading-container">
+				<h3><%=getMsg("order.detail.tile.order.details")%></h3>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<td class="kkod-wide-col"><%=getMsg("order.detail.tile.item")%></td>
+						<td class="kkod-narrow-col kk-right"><%=getMsg("order.detail.tile.total")%></td>
+					</tr>
+				</thead>
+				<tbody>
+					<%if (order.orderProducts != null && order.orderProducts.length > 0){ %>
+						<% for (var i = 0; i < order.orderProducts.length; i++){ %>
+							<% var op = order.orderProducts[i];%>
+							<tr>
+								<td>
+									<a href='#' class="kkod-order-item-link kkod-text-link" id='<%="kkod-"+op.productId%>'><%=op.name%>
+										<%if (op.opts != null && op.opts.length > 0) {%>
+											<%for ( var j = 0; j < op.opts.length; j++) {%>
+												<%var opt = op.opts[j];%>
+												<%if (opt.type == 0) {%> 
+													<br><span class="kkod-shopping-cart-item-option"> - <%=opt.name%>:&nbsp;<%=opt.value%></span>
+												<%} else if (opt.type == 1) {%> 
+													<br><span class="kkod-shopping-cart-item-option"> - <%=opt.name%>:&nbsp;<%=opt.quantity%>&nbsp;<%=opt.value%></span>
+												<%} else if (opt.type == 2) {%> 
+													<br><span class="kkod-shopping-cart-item-option"> - <%=opt.name%>:&nbsp;<%=formatMoney(opt.customerPrice)%></span>
+												<%} else if (opt.type == 3) {%> 
+													<br><span class="kkod-shopping-cart-item-option"> - <%=opt.name%>:&nbsp;<%=opt.customerText%></span>
+												<%}%>					
+											<%}%>
+										<%}%>
+									</a>
+									<div class="kkod-item-quantity"><%=getMsg("order.detail.tile.quantity")%>: <%=op.quantity%></div>
+								</td>
+								<%if (displayPriceWithTax) {%>
+									<td  class="kkod-total-price kk-right"><%=formatMoney(op.finalPriceIncTax)%></td>
+								<%} else {%>
+									<td  class="kkod-total-price kk-right"><%=formatMoney(op.finalPriceExTax)%></td>
+								<%}%>	
+							</tr>
+						<%}%>
+					<%}%>
+					<%if (order.orderTotals != null && order.orderTotals.length > 0){ %>
+						<% for (var i = 0; i < order.orderTotals.length; i++){ %>
+							<% var ot = order.orderTotals[i];%>
+							<%var rowClass = "kkod-costs-and-promotions";%>
+							<%if (ot.className == "ot_total"){ %>
+								<%rowClass = "kkod-shopping-cart-total";%>
+							<%} else if (ot.className == "ot_subtotal"){%>
+								<%rowClass = "kkod-shopping-cart-subtotal";%>
+							<% } %>
+							<tr class="<%=rowClass%>">	
+								<%if (ot.className == "ot_reward_points" || ot.className == "ot_product_reward_points") {%>
+									<td class="kkod-cost-overview"><%=ot.title%></td>	
+									<td class="kkod-cost-overview-amounts kk-right"><%=ot.value%></td>
+								<%}else if (ot.className == "ot_free_product") {%>
+									<td class="kkod-cost-overview"><%=ot.title%></td>
+									<td class="kkod-cost-overview-amounts kk-right"><%=ot.text%></td>
+								<%}else if (ot.className == "ot_total") {%>
+									<td><%=ot.title%></td>
+									<td class="kk-right"><%=formatMoney(ot.value)%></td>
+								<%}else if (isDiscountModule(ot.className)) {%>	
+									<td class="kkod-cost-overview"><span class="kkod-discount"><%=ot.title%></span></td>
+									<td class="kkod-cost-overview-amounts kk-right"><span class="kkod-discount">-<%=formatMoney(ot.value)%></span></td>
+								<%}else{%>
+									<td class="kkod-cost-overview"><%=ot.title%></td>	
+									<td class="kkod-cost-overview-amounts kk-right"><%=formatMoney(ot.value)%></td>
+								<%}%>
+							</tr>
+						<%}%>
+					<%}%>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div id="kkod-button-container">
+		<a  id="kkod-repeat-button" class="kk-button kk-small-rounded-corners"><span><%=getMsg("order.detail.tile.repeat")%></span></a>
+		<a  id="kkod-back-button" class="kk-button kk-small-rounded-corners"><span><%=getMsg("order.detail.tile.back")%></span></a>
+	</div>
+</div>
+

@@ -1,0 +1,105 @@
+<%
+//(c) 2015 DS Data Systems UK Ltd, All rights reserved.
+//
+//DS Data Systems and KonaKart and their respective logos, are
+//trademarks of DS Data Systems UK Ltd. All rights reserved.
+//
+//The information in this document is free software;you can redistribute
+//it and/or modify it under the terms of the GNU Lesser General Public
+//License as published by the Free Software Foundation; either
+//version 2.1 of the License, or (at your option) any later version.
+//
+//This software is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+//Lesser General Public License for more details.
+%>
+
+<script type="text/javascript">
+	$(function() {
+		$.datepicker.setDefaults($.datepicker.regional['<%=locale.slice(0,2)%>']);
+		$('#kkDatepicker').datepicker({changeMonth: true, changeYear: true, dateFormat: '<%=getMsg("datepicker.date.format")%>', yearRange: "-120:-10", minDate: '-120y', maxDate: '-10y'});
+	});	
+</script>	
+
+
+<h1 id="kk-page-title"><%=getMsg("customer.info.myaccount")%></h1>			
+<div class="kk-content-area kk-rounded-corners">
+	<div>
+		<div id="kk-error"></div>
+		<form action="#" id="kk-manage-personal-info-form" method="post">
+			<div class="kk-form-section">
+				<div>
+					<h3><%=getMsg("customer.info.personal.details")%><span class="kk-required-text"><span class="kk-required-icon kk-required-blue"></span>&nbsp;<%=getMsg("customer.info.required.fields")%></span></h3>				
+				</div>
+				<div class="kk-form-section-fields">
+					<div class="kk-form-section-divider"></div>
+					<div class="kk-form-input kk-radio-buttons">
+						<label><%=getMsg("customer.info.gender")%></label>
+						<%var checkedM = (customer.gender.toUpperCase()=='M')?'checked':''; %>						
+						<span class="kk-radio-button"><input type="radio" name="kkGender" value="m" <%=checkedM%> > <%=getMsg("customer.info.male")%></span> 
+						<%var checkedF = (customer.gender.toUpperCase()=='F')?'checked':''; %>						
+						<span class="kk-radio-button"><input type="radio" name="kkGender" value="f" <%=checkedF%>> <%=getMsg("customer.info.female")%></span>
+						<span class="kk-required-icon kk-required-blue"></span>	
+						<span class="kk-validation-msg"></span>							
+					</div>				
+					<div class="kk-form-input">
+						<label><%=getMsg("customer.info.first.name")%></label>
+						<% var firstName = (kk.isNoName())?'':customer.firstName; %>
+						<input type="text" value='<%=firstName%>' id="kkFirstName" name="kkFirstName"/>
+						<span class="kk-required-icon kk-required-blue"></span>
+						<span class="kk-validation-msg"></span>
+					</div>
+					<div class="kk-form-input">
+						<label><%=getMsg("customer.info.last.name")%></label>
+						<% var lastName = (kk.isNoName())?'':customer.lastName; %>
+						<input type="text" value='<%=lastName%>' id="kkLastName" name="kkLastName"/>
+						<span class="kk-required-icon kk-required-blue"></span>
+						<span class="kk-validation-msg"></span>
+					</div>
+					<div class="kk-form-input">
+						<label><%=getMsg("customer.info.dob")%></label>
+						<% var birthDate = (kk.isNoBirthdate())?'':formatDate(customer.birthDate); %>
+						<input type="text" id="kkDatepicker"  value='<%=birthDate%>' name="kkBirthDateString"/>
+						<span class="kk-required-icon kk-required-blue"></span>
+						<span class="kk-validation-msg"></span>
+					</div>
+					<div class="kk-form-input">
+						<label><%=getMsg("customer.info.tax.id")%></label>
+						<input type="text" value='<%=customer.taxIdentifier%>' id="kkTaxId" name="kkTaxId"/>
+						<span class="kk-validation-msg"></span>
+					</div>
+				</div>
+			</div>
+			<div class="kk-form-section">
+				<h3><%=getMsg("customer.info.contact.info")%></h3>
+				<div class="kk-form-section-fields">
+					<div class="kk-form-section-divider"></div>
+					<div class="kk-form-input">
+						<label><%=getMsg("customer.info.tel.number")%></label>
+						<% var telephoneNumber = (kk.isNoTelephone())?'':customer.telephoneNumber; %>
+						<input type="text" value='<%=telephoneNumber%>' id="kkTelephoneNumber" name="kkTelephoneNumber" />
+						<span class="kk-required-icon kk-required-blue"></span>
+						<span class="kk-validation-msg"></span>
+					</div>
+					<div class="kk-form-input">
+						<label><%=getMsg("customer.info.tel.number1")%></label>
+						<input type="text" value='<%=customer.telephoneNumber1%>' id="kkTelephoneNumber1" name="kkTelephoneNumber1" />
+						<span class="kk-validation-msg"></span>
+					</div>
+					<div class="kk-form-input">
+						<label><%=getMsg("customer.info.fax.number")%></label>
+						<input type="text" value='<%=customer.faxNumber%>' id="kkFaxNumber" name="kkFaxNumber" />
+						<span class="kk-validation-msg"></span>
+					</div>
+				</div>
+			</div>
+			<div class="kk-form-buttons">
+				<a id="kk-manage-personal-info-submit" class="kk-continue-button kk-button kk-small-rounded-corners"><span><%=getMsg("customer.info.continue")%></span></a>
+				<a  id="kk-cust-info-back" class="kk-button kk-small-rounded-corners"><span><%=getMsg("customer.info.back")%></span></a>
+			</div>
+		</form>
+	</div>
+</div>
+
+

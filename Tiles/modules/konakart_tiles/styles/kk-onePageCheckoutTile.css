@@ -1,0 +1,244 @@
+/*
+# (c) 2015 DS Data Systems UK Ltd, All rights reserved.
+#
+# DS Data Systems and KonaKart and their respective logos, are 
+# trademarks of DS Data Systems UK Ltd. All rights reserved.
+#
+# The information in this document below this text is free software; you can redistribute 
+# it and/or modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+# 
+# This software is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+*/
+
+.kkopc-options{
+	float: left;
+	font-size: 11px;
+	margin-top: 10px;
+}
+.kkopc-option{
+	float: left;
+	padding: 0 5px;
+}
+
+.kkopc-heading-container{
+	border-bottom: 1px solid #dadada;
+	margin-bottom: 7.5px;
+	overflow: hidden;
+}
+
+.kkopc-heading-container h3{
+	float: left;
+	padding: 7.5px 5px 7.5px 0;
+	margin: 0;
+}
+
+.kkopc-area{
+	padding-bottom: 7.5px;
+}
+
+.kkopc-area-content select, form .kkopc-area-content input{
+	float: none;
+	width: 25%;
+}
+
+.kkopc-area-content-select{
+	margin: 7.5px 0;
+}
+
+.kkopc-area-content label{
+	font-weight: bold;
+	margin-top: 3px;
+	width:140px;
+	float:left;
+}
+
+.kkopc-area-content select{
+	width:162px;
+}
+
+.kkopc-area-content textarea{
+	display: inline-block;
+	margin-top: 0.5em;
+	width: 98%;
+}
+
+#kkopc-column-left{
+	float: left;
+	margin-right: 5%;	
+	width: 60%;
+}
+
+#kkopc-column-right{
+	float: left;
+	width: 35%;
+}
+
+#kkopc-column-right table thead td{
+	font-weight: bold;
+}
+
+#kkopc-column-right table td{
+	padding-right: 5px;
+	width: auto;
+}
+
+#kkopc-column-right table tr .kkopc-wide-col{
+	width: 60% !important;
+}
+
+#kkopc-column-right table tr .kkopc-narrow-col{
+	width: 20% !important;
+}
+
+#kkopc-column-right .shopping-cart-total{
+	border-top: 1px solid #dadada;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+#kkopc-confirm-order-button-container{
+	border-top: 1px solid #dadada;
+	float: left;
+	margin-top: 7.5px;
+	padding-top: 15px;
+	width: 100%;
+}
+
+#kkopc-confirm-order-button{
+	float: right;
+}
+
+.kkopc-shopping-cart-item-option{
+	font-size: 10px;
+	font-style: italic;  
+}
+
+.kkopc-text-link {
+	color: #1a6baa !important;
+	cursor:pointer;
+}
+
+.kkopc-discount{
+	color: #cc0000;
+}
+
+.kkopc-shopping-cart-total {
+	border-top: 1px solid #dadada;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.kkopc-shopping-cart-subtotal {
+	border-top: 1px solid #dadada;
+}
+
+.kkopc-separator-small{
+	background-color: #e5e5e5;
+	float: left;
+	width: 1px;
+	height: 12px;
+}
+
+#kkopc-column-right table {
+  border-collapse: collapse;
+}
+
+.kkopc-select-addr-section{	
+	display: table;
+	padding: 0.5em 0;
+}
+
+#kkopc-addr-dialog{
+	width: 400px;
+}
+
+.kkopc-select-addr{
+	width:300px;
+	float:left;
+}
+
+.kkopc-select-addr-buttons{
+	display: inline-block;
+	padding: 0.5em 0;
+	width:100px;
+	float:right;
+	margin-left:50px;
+	margin-top:20px;
+}
+
+#kkopc-addr-dialog .kk-button{
+	color:#fff;
+}
+
+#kkopc-error-dialog .kk-button{
+	color:#fff;
+	float:right;
+}
+
+#kkopc-continue-button {
+	float:right;
+}	
+
+/*
+* Promotion codes
+*/
+
+.kkopc-update-button{
+	background: #000;
+	display: inline-block;
+	font-size: 9px;
+	margin: 2px 0 0 10px;
+	padding: 0 10px;
+	color:#fff;
+	text-transform: uppercase;
+	display:none;
+}
+
+.kkopc-update-button:hover{
+	text-decoration: underline;
+	color:#fff;
+	cursor:pointer;
+}
+
+#kkopc-promotion-codes{
+	overflow: hidden;
+}
+
+#kkopc-promotion-codes .kkopc-promotion-codes-field label{
+	font-weight: normal;
+}
+
+#kkopc-promotion-codes .kkopc-promotion-codes-field  input{
+	font-weight: normal;
+	width:160px;
+}
+
+#kkopc-promotion-codes .kkopc-promotion-codes-field{
+	height: 20px;
+	width: auto;
+	margin-bottom:7px;
+}
+
+#kkopc-promotion-codes .kkopc-promotion-codes-field label.error {
+	margin:0;
+	padding: 0;
+	color: #A00000;
+	width:200px;
+}
+
+.kkopc-product-image{
+	height: auto;
+	display: block;
+	margin: 0 auto;
+	max-width: 60px;
+	width: 80%;
+}
+
+
+

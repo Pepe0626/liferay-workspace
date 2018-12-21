@@ -1,0 +1,268 @@
+<%
+//(c) 2015 DS Data Systems UK Ltd, All rights reserved.
+//
+//DS Data Systems and KonaKart and their respective logos, are
+//trademarks of DS Data Systems UK Ltd. All rights reserved.
+//
+//The information in this document is free software;you can redistribute
+//it and/or modify it under the terms of the GNU Lesser General Public
+//License as published by the Free Software Foundation; either
+//version 2.1 of the License, or (at your option) any later version.
+//
+//This software is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+//Lesser General Public License for more details.
+%>
+
+<h1 id="kk-page-title"><%=getMsg("opc.tile.orderconfirmation")%></h1>
+<div id="kkopc-order-confirmation" class="kk-content-area kk-rounded-corners">
+	<form action="#" id="kk-opc-form" method="post" class="kk-form-section">
+		<div id="kkopc-column-left">
+			<div id="kkopc-delivery-address" class="kkopc-area">
+				<div class="kkopc-heading-container">
+					<h3><%=getMsg("opc.tile.deliveryaddress")%></h3>
+					<div class="kkopc-options">
+					<a id="kkopc-newDelivery" title='<%=getMsg("opc.tile.new.addr.tip")%>' class="kkopc-option kkopc-text-link has-tooltip"><%=getMsg("opc.tile.new")%></a>
+					<span class="kkopc-separator-small"></span>
+					<a id="kkopc-editDelivery" title='<%=getMsg("opc.tile.edit.addr.tip")%>' class="kkopc-option kkopc-text-link has-tooltip"><%=getMsg("opc.tile.edit")%></a>
+					<%if (customer != null && customer.type != 2) { %>
+						<span class="kkopc-separator-small"></span>
+						<a id="kkopc-abdelivery" title='<%=getMsg("opc.tile.addr.book.tip")%>' class="kkopc-option kkopc-text-link has-tooltip"><%=getMsg("opc.tile.addr.book")%></a>
+					<% } %>
+				</div>
+				</div>
+				<div class="kkopc-area-content">
+					<span><%=removeCData(checkoutOrder.deliveryFormattedAddress)%></span>
+					<div id="kkopc-shipping-info" class="kkopc-area-content-select">
+						<label><%=getMsg("opc.tile.shippingmethod")%></label>
+						<select name="shipping" onchange="kk.shippingRefresh();" id="kkopc-shippingQuotes">
+							<%if (shippingQuotes != null && shippingQuotes.length > 0){ %>										
+								<% var shipping = (checkoutOrder.shippingQuote!=null)?checkoutOrder.shippingQuote.moduleCode:"";%> 
+								<%if (checkoutOrder.shippingQuote!=null && checkoutOrder.shippingQuote.shippingServiceCode != null && checkoutOrder.shippingQuote.shippingServiceCode.length > 0){ %>
+									<% shipping = shipping + "~~" + checkoutOrder.shippingQuote.shippingServiceCode;%>
+								<% } %>																										
+								<% for (var i = 0; i < shippingQuotes.length; i++){ %>
+									<% var quote = shippingQuotes[i];%>
+									<% var code = quote.moduleCode;%>
+									<%if (quote.shippingServiceCode!=null && quote.shippingServiceCode.length > 0){ %>
+										<% code = code + "~~" + quote.shippingServiceCode;%>
+									<% } %>										
+									<%if (code == shipping){ %>
+										<option  value="<%=code%>" selected="selected"><%=quote.description%></option>
+									<% } else { %>
+										<option  value="<%=code%>"><%=quote.description%></option>
+									<% } %>
+								<% } %>										
+							<%} else {%>
+								<option  value="-1" selected="selected"><%=getMsg("opc.tile.no.shipping.methods")%></option>
+							<% } %>
+						</select>
+					</div>
+				</div>		    				
+			</div>
+			<div id="kkopc-billing-address" class="kkopc-area">
+				<div class="kkopc-heading-container">
+					<h3><%=getMsg("opc.tile.billingaddress")%></h3>
+					<div class="kkopc-options">
+					<a id="kkopc-newBilling" title='<%=getMsg("opc.tile.new.addr.tip")%>' class="kkopc-option kkopc-text-link has-tooltip"><%=getMsg("opc.tile.new")%></a>
+					<span class="kkopc-separator-small"></span>
+					<a id="kkopc-editBilling"  title='<%=getMsg("opc.tile.edit.addr.tip")%>' class="kkopc-option kkopc-text-link has-tooltip"><%=getMsg("opc.tile.edit")%></a>
+					<%if (customer != null && customer.type != 2) { %>
+						<span class="kkopc-separator-small"></span>
+						<a id="kkopc-abbilling" title='<%=getMsg("opc.tile.addr.book.tip")%>' class="kkopc-option kkopc-text-link has-tooltip"><%=getMsg("opc.tile.addr.book")%></a>
+					<% } %>
+				</div>
+				</div>
+				<div class="kkopc-area-content">
+					<span><%=removeCData(checkoutOrder.billingFormattedAddress)%></span>
+					<div id="kkopc-payment-method" class="kkopc-area-content-select">
+						<label><%=getMsg("opc.tile.paymentmethod")%></label>
+						<select name="payment" onchange="kk.paymentRefresh();" id="kkopc-paymentDetails">
+							<%if (paymentDetails != null && paymentDetails.length > 0){ %>	
+								<% var selectedPayment = (checkoutOrder.paymentDetails != null)?checkoutOrder.paymentDetails.code:""; %>
+								<%if (checkoutOrder.paymentDetails!=null && checkoutOrder.paymentDetails.subCode != null && checkoutOrder.paymentDetails.subCode.length > 0){ %>
+									<% selectedPayment = selectedPayment + "~~" + checkoutOrder.paymentDetails.subCode;%>
+								<% } %>																										
+								<% for (var i = 0; i < paymentDetails.length; i++){ %>
+									<% var pd = paymentDetails[i];%>
+									<% var code = pd.code;%>
+									<%if (pd.subCode!=null && pd.subCode.length > 0){ %>
+										<% code = code + "~~" + pd.subCode;%>
+									<% } %>										
+									<%if (selectedPayment == code){ %>
+										<option  value="<%=code%>" selected="selected"><%=pd.description%></option>
+									<% } else { %>
+										<option  value="<%=code%>"><%=pd.description%></option>
+									<% } %>
+								<% } %>										
+							<%} else {%>
+								<option  value="-1" selected="selected"><%=getMsg("opc.tile.no.payment.methods")%></option>
+							<% } %>
+						</select>
+					</div>
+					<div id="kkopc-promotion-codes">
+						<div id="kkopc-promotion-codes-container">
+							<%if (displayCouponEntry == true) { %>
+								<div class="kkopc-promotion-codes-field">				
+									<label><%=getMsg("opc.tile.couponcode")%></label>
+									<input type="text" name="kkCouponCode" id="kkCouponCode" value='<%=couponCode%>'/>
+									<a id="kkopc-couponCodeUpdate" class="kkopc-update-button kk-small-rounded-corners"><%=getMsg("opc.tile.update")%></a>
+									<span class="kk-validation-msg"></span>
+								</div>
+							<% } %>
+							<%if (displayGiftCertificateEntry == true) { %>
+								<div class="kkopc-promotion-codes-field">				
+									<label><%=getMsg("opc.tile.giftcertcode")%></label>
+									<input type="text" name="kkGiftCertCode" id="kkGiftCertCode" value='<%=giftCertCode%>'/>
+									<a id="kkopc-giftCertCodeUpdate" class="kkopc-update-button kk-small-rounded-corners"><%=getMsg("opc.tile.update")%></a>
+									<span class="kk-validation-msg"></span>
+								</div>
+							<% } %>
+						</div>
+					</div>
+				</div>		    				
+			</div>
+			<div class="kkopc-area">
+				<div class="kkopc-heading-container">
+					<h3><%=getMsg("opc.tile.delivery.notes")%></h3>
+				</div>
+				<div class="kkopc-area-content">
+					<%=getMsg("opc.tile.info")%> <textarea id="kkOrderComment" name="kkOrderComment" rows="5" name="comment"></textarea>
+					<span class="kk-validation-msg"></span>	
+				</div>		    				
+			</div>
+		</div>
+		<div id="kkopc-column-right">
+			<div>
+				<div class="kkopc-heading-container">
+					<h3><%=getMsg("opc.tile.shopping.cart")%></h3>
+				</div>
+				<table>
+					<thead>
+						<tr>
+							<td class="kkopc-narrow-col"></td>
+							<td class="kkopc-wide-col"><%=getMsg("opc.tile.item")%></td>
+							<td class="kkopc-narrow-col kk-right"><%=getMsg("opc.tile.total")%></td>
+						</tr>
+					</thead>
+					<tbody>
+						<%if (checkoutOrder.orderProducts != null && checkoutOrder.orderProducts.length > 0){ %>
+							<% for (var i = 0; i < checkoutOrder.orderProducts.length; i++){ %>
+								<% var op = checkoutOrder.orderProducts[i];%>
+								<tr>
+									<td>
+										<img class="kkopc-product-image" src="<%=op.prodImage%>" border="0" alt="<%=op.product.name%>" title=" <%=op.product.name%> ">
+									</td>
+									<td>
+										<a href='#' class="kkopc-order-item-link kkopc-text-link" id='<%="kkopc-"+op.productId%>'><%=op.name%>
+											<%if (op.opts != null && op.opts.length > 0) {%>
+												<%for ( var j = 0; j < op.opts.length; j++) {%>
+													<%var opt = op.opts[j];%>
+													<%if (opt.type == 0) {%> 
+														<br><span class="kkopc-shopping-cart-item-option"> - <%=opt.name%>:&nbsp;<%=opt.value%></span>
+													<%} else if (opt.type == 1) {%> 
+														<br><span class="kkopc-shopping-cart-item-option"> - <%=opt.name%>:&nbsp;<%=opt.quantity%>&nbsp;<%=opt.value%></span>
+													<%} else if (opt.type == 2) {%> 
+														<br><span class="kkopc-shopping-cart-item-option"> - <%=opt.name%>:&nbsp;<%=formatMoney(opt.customerPrice)%></span>
+													<%} else if (opt.type == 3) {%> 
+														<br><span class="kkopc-shopping-cart-item-option"> - <%=opt.name%>:&nbsp;<%=opt.customerText%></span>
+													<%}%>					
+												<%}%>
+											<%}%>
+										</a>
+										<div class="kkopc-item-quantity"><%=getMsg("opc.tile.quantity")%>: <%=op.quantity%></div>
+									</td>
+									<%if (displayPriceWithTax) {%>
+										<td  class="kkopc-total-price kk-right"><%=formatMoney(op.finalPriceIncTax)%></td>
+									<%} else {%>
+										<td  class="kkopc-total-price kk-right"><%=formatMoney(op.finalPriceExTax)%></td>
+									<%}%>	
+								</tr>
+							<%}%>
+						<%}%>
+						<%if (checkoutOrder.orderTotals != null && checkoutOrder.orderTotals.length > 0){ %>
+							<% for (var i = 0; i < checkoutOrder.orderTotals.length; i++){ %>
+								<% var ot = checkoutOrder.orderTotals[i];%>
+								<%var rowClass = "kkopc-costs-and-promotions";%>
+								<%if (ot.className == "ot_total"){ %>
+									<%rowClass = "kkopc-shopping-cart-total";%>
+								<%} else if (ot.className == "ot_subtotal"){%>
+									<%rowClass = "kkopc-shopping-cart-subtotal";%>
+								<% } %>										
+								<tr class="<%=rowClass%>">	
+									<td></td>	
+									<%if (ot.className == "ot_reward_points" || ot.className == "ot_product_reward_points") {%>
+										<td class="kkopc-cost-overview"><%=ot.title%></td>	
+										<td class="kkopc-cost-overview-amounts kk-right"><%=ot.value%></td>
+									<%}else if (ot.className == "ot_free_product") {%>
+										<td class="kkopc-cost-overview"><%=ot.title%></td>
+										<td class="kkopc-cost-overview-amounts kk-right"><%=ot.text%></td>
+									<%}else if (ot.className == "ot_total") {%>
+										<td><%=ot.title%></td>
+										<td class="kk-right"><%=formatMoney(ot.value)%></td>
+									<%}else if (isDiscountModule(ot.className)) {%>	
+										<td class="kkopc-cost-overview"><span class="kkopc-discount"><%=ot.title%></span></td>
+										<td class="kkopc-cost-overview-amounts kk-right"><span class="kkopc-discount">-<%=formatMoney(ot.value)%></span></td>
+									<%}else{%>
+										<td class="kkopc-cost-overview"><%=ot.title%></td>	
+										<td class="kkopc-cost-overview-amounts kk-right"><%=formatMoney(ot.value)%></td>
+									<%}%>		    																		
+								</tr>
+							<%}%>
+						<%}%>
+					</tbody>	    				
+				</table>
+			</div>
+		</div>			    				
+		<div id="kkopc-confirm-order-button-container">	
+			<a id="kkopc-continue-button" class="kk-continue-button kk-button kk-small-rounded-corners">
+				<span><%=getMsg("opc.tile.confirmorder")%></span>
+			</a>
+		</div>
+	</form>
+</div>
+
+<div id="kkopc-error-dialog" title="<%=getMsg("opc.tile.problem.title")%>" class="content-area rounded-corners">
+	<div>
+		<div class="kk-form-section">
+			<div class="kk-form-section-title no-margin">
+				<h3><%=getMsg("opc.tile.problem")%></h3>									
+			</div>
+			<div>
+				<p><span id="kkopc-error-msg"></span></p>
+			</div>
+			<a id="kkopc-error-dialog-close" class="kk-button kk-small-rounded-corners">
+				<span ><%=getMsg("opc.tile.close")%></span>
+			</a>															
+		</div>
+	</div>
+</div>
+
+<div id="kkopc-addr-dialog" title="<%=getMsg("opc.tile.addr.book.header")%>" class="content-area rounded-corners">
+	<div>
+		<div class="kk-form-section">
+			<div class="kk-form-section-title no-margin">
+				<h3><%=getMsg("opc.tile.dialog.addr.select")%></h3>									
+			</div>
+			<%if (addresses != null && addresses.length > 0){ %>
+				<% for (var i = 0; i < addresses.length; i++){ %>
+					<% var addr = addresses[i];%>						
+					<div class="kkopc-select-addr-section <%=(i%2==0)?"even":"odd"%>">
+						<div class="kkopc-select-addr">
+							<%=removeCData(addr.formattedAddress)%>
+						</div>
+						<div class="kkopc-select-addr-buttons">
+							<a id='<%="kkopcaddrid-"+addr.id%>'  class="kkopc-select-addr-button kk-button kk-small-rounded-corners">
+								<span ><%=getMsg("opc.tile.select")%></span>
+							</a>									
+						</div>
+					</div>
+				<%}%>
+			<%}%>
+		</div>
+	</div>
+</div>
+
+
+

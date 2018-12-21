@@ -1,0 +1,6 @@
+Bundle-Name: Horizontal Carousel Portlet
+Bundle-SymbolicName: konakart.horizontal.carousel
+Bundle-Version: 8.9.0.0
+-metatype: *
+Web-ContextPath: /KKHorizontalCarousel
+-dsannotations: *

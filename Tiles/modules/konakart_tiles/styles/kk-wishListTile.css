@@ -1,0 +1,274 @@
+/*
+# (c) 2015 DS Data Systems UK Ltd, All rights reserved.
+#
+# DS Data Systems and KonaKart and their respective logos, are 
+# trademarks of DS Data Systems UK Ltd. All rights reserved.
+#
+# The information in this document below this text is free software; you can redistribute 
+# it and/or modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+# 
+# This software is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+*/
+
+/*
+# Common
+*/
+
+.kkwt-wishList-item-option{
+	font-size: 10px;
+	font-style: italic;  
+}
+
+/*
+# Popup Tile
+*/
+#kkpwt-wishList:hover{
+	cursor: pointer;
+}
+
+.kkpwt-top-bar-menu-item{
+	/*float: left; */
+	display: inline-block;
+	margin: 0 0 0 1.1em;
+}
+
+.kkpwt-top-bar-menu-icon  #kkpwt-num-items {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 0.75rem;
+	vertical-align: text-top;
+}
+
+#kkpwt-wishList-container{
+	display: none; 
+	cursor: pointer;
+	z-index: 1000000;
+}
+
+#kkpwt-wishList-mouseover-shadow{
+	right: -4px;
+	top: 4px;
+}
+
+.kkpwt-slide-out-shadow{
+	background-color: #ccc;
+	behavior: url('../script/pie/PIE.htc');
+     -moz-border-radius: 0 7px 0 0;
+    -webkit-border-radius: 0 7px 0 0;
+    -khtml-border-radius: 0 7px 0 0;
+    border-radius: 0 7px 0 0;
+	border-right: 3px;
+	height: 18px;
+	width: 3px;
+	position: absolute;
+}
+
+#kkpwt-wishList-contents{
+	right: -1px;
+	top: 19px;
+}
+
+#kkpwt-wishList-items{
+	border-bottom: 1px #cfcfcf solid;
+	padding-bottom: 5px;
+	overflow-y:auto;
+	max-height:500px;
+	overflow-x:hidden;
+}
+
+.kkpwt-wishList-item-title{
+	color: #000;
+	display: inline-block;
+	font-weight: bold;
+	margin-top: 5px;
+	overflow: hidden;
+	text-decoration: none;
+	width: 150px;
+}
+
+.kkpwt-wishList-item-title:hover	{
+	text-decoration: underline;
+}
+
+.kkpwt-wishList-item-price{
+	margin-left: 90px;  
+	position: relative;
+}
+
+.kkpwt-subtotal{
+	color: #333;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 10px 0 5px 0;
+}
+
+.kkpwt-subtotal-label{
+	float: left;
+	padding-top: 5px;
+	text-transform: uppercase;
+	text-align: left;
+	width: 90px;
+}
+
+.kkpwt-subtotal-amount{
+	float: left;
+	padding-top: 5px;
+}
+
+#kkpwt-wishList-checkout-button{
+	float: right;
+	font-weight: normal;
+}
+
+
+.kkpwt-shadow {
+	-moz-box-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+	-webkit-box-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+	box-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+}
+
+.kkpwt-slide-out-contents{
+	background-color: #fff;
+	behavior: url('../script/pie/PIE.htc');
+     -moz-border-radius: 10px 0 10px 10px;
+    -webkit-border-radius: 10px 0 10px 10px;
+    -khtml-border-radius: 10px 0 10px 10px;
+    border-radius: 10px 0 10px 10px;
+	border: 1px #cfcfcf solid; 
+	line-height: 15px;
+	padding: 10px;
+	position: absolute;
+	top: 23px;
+	width: 250px;
+	z-index: -1;
+}
+
+.kkpwt-wishList-mouseover{
+	background-color: #fff;
+	border-top: 1px #cfcfcf solid;
+	border-left: 1px #cfcfcf solid;
+	border-right: 1px #cfcfcf solid;
+	height: 12px;
+	margin: -5px -5px -5px 5px !important;
+	overflow: visible;
+	position: relative;
+	padding: 4px;
+	width: auto;
+}
+
+.kkpwt-wishList-item{
+	display: table;
+	height: 1%; /* For IE 7 */
+	*display: block; /* For IE 7 */
+	text-align: left;
+	width:240px;	
+}
+
+.kkpwt-wishList-item img{
+	float: left;
+	height: 60px;
+	margin: 7px 15px 5px 15px;
+	/*width: 60px;*/
+}
+
+/*
+# Manage WishList
+*/
+
+#kkmwt-container thead td {
+	border-bottom: 1px solid #dadada;
+	font-weight: bold;
+}
+
+#kkmwt-container table thead tr td{
+	padding-top: 0;
+}
+
+#kkmwt-container table td{
+	padding: 0.5em;
+}
+
+#kkmwt-container table a{
+	font-weight: bold;
+}
+
+#kkmwt-container table{
+	width: 100%;
+}
+
+#kkmwt-container #kkmwt-image-col {
+	width: 10%;
+}
+
+#kkmwt-container #kkmwt-item-col {
+	width: 30%;
+}
+
+#kkmwt-container #kkmwt-priority-col {
+	width: 20%;
+}
+
+#kkmwt-container #kkmwt-price-col {
+	width: 15%;
+	text-align: right;
+}
+
+#kkmwt-container #kkmwt-add-to-cart-col {
+	width: 20%;
+}
+
+#kkmwt-container #kkmwt-remove-col {
+	width: 5%;
+}
+
+.kkmwt-product-image:hover{
+	cursor: pointer;
+}
+
+.kkmwt-text-link {
+	color: #1a6baa !important;
+	cursor:pointer;
+}
+
+#kkmwt-continue-button{
+	margin-top: 10px;
+	float: right;
+}
+
+#kkmwt-cost-overview{
+	border-bottom: 1px solid #dadada;
+	border-top: 1px solid #dadada;
+	width: 100%;
+	margin: 10px 0 10px 0;
+}
+
+.kkmwt-cost-overview-amounts{
+	font-weight: bold;
+}
+
+.kkmwt-remove {
+	color: #999;
+	font-size: 1.25em !important;
+	margin: 0 0 0 0.5em;
+}
+
+.kkmwt-remove:hover{
+	text-decoration: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+

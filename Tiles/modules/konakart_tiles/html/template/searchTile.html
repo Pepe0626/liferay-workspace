@@ -1,0 +1,89 @@
+<%
+//(c) 2015 DS Data Systems UK Ltd, All rights reserved.
+//
+//DS Data Systems and KonaKart and their respective logos, are
+//trademarks of DS Data Systems UK Ltd. All rights reserved.
+//
+//The information in this document is free software;you can redistribute
+//it and/or modify it under the terms of the GNU Lesser General Public
+//License as published by the Free Software Foundation; either
+//version 2.1 of the License, or (at your option) any later version.
+//
+//This software is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+//Lesser General Public License for more details.
+%>
+
+<%if (useSolr) { %>
+<script type="text/javascript">	
+	$(function() {
+		$("#kkst-search-input").autocomplete(
+				{
+					source : function(request, response) {
+
+						var options = new Object();
+						options.languageCode = kk.getLangCode();
+						options.limit = "10";
+						options.startTag = "<b>";
+						options.endTag = "</b>";
+						options.searchText = request.term.toLowerCase();
+						options.returnRichText = "true";
+						options.returnRawText = "true";
+						options.topLevelCategoryId = $("#kkst-top-cat-list").val();
+
+						kkEng.getSuggestedSearchItems(kk.getSessionId(), options, function(result,
+								textStatus, jqXHR) {
+							var ssArray = decodeJson(result);
+							var srArray = [];
+							for (var i = 0; i < ssArray.length; i++) {
+								var ss = ssArray[i];
+								var sr = new Object();
+								sr.label = kk.processTermResult(ss.richText, /* rich */true);
+								sr.value = kk.processTermResult(ss.rawText, /* rich */false);
+								sr.id = ss.id + "," + ss.manufacturerId + "," + ss.categoryId;
+								srArray[i] = sr;
+							}
+							response(srArray);
+						}, null, kk.getKKEng());
+
+					},
+					minLength : 1,
+					select : function(event, ui) {
+						self.kk.search(ui.item.id, ui.item.value);
+					}
+				}).data("uiAutocomplete")._renderItem = function(ul, item) {
+			ul.addClass('ui-corner-all');
+			return $("<li class='ui-corner-all'></li>").data("item.autocomplete", item).append(
+					"<a>" + item.label + "</a>").appendTo(ul);
+		};
+
+	});
+</script>
+
+<% } %>
+
+<div id="kkst-header-container">
+	<div id="kkst-header">
+		<div id="kkst-logo" style="font-size: 0px;">
+			<!-- <a href="http://www.konakart.com">KonaKart</a> -->
+			<p>
+				<a href="http://www.cdoautopartes.com.mx/PortalRamaCdo/">
+					<img src="http://localhost:8780/konakart_tiles/images/logo.png">
+				</a>
+			
+		</div>
+		<div id="kkst-search">
+			<select id="kkst-top-cat-list" class="kk-rounded-corners-left">
+				<option  value="-1"><%=getMsg("search.tile.all")%></option>
+				<%for (var i = 0; i < catTree.length; i++) {%>
+					<%var cat = catTree[i]; %>
+					<option  value="<%=cat.id%>"><%=cat.name%></option>
+				<% } %>					
+			</select>
+			<input type="text" id="kkst-search-input"> 
+			<a id="kkst-search-button"	class="kk-rounded-corners-right"><%=getMsg("search.tile.search")%></a>
+		</div>
+		</p>
+	</div>
+</div>

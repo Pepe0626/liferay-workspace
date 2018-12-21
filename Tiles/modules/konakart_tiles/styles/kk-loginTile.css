@@ -1,0 +1,136 @@
+/*
+# (c) 2015 DS Data Systems UK Ltd, All rights reserved.
+#
+# DS Data Systems and KonaKart and their respective logos, are 
+# trademarks of DS Data Systems UK Ltd. All rights reserved.
+#
+# The information in this document below this text is free software; you can redistribute 
+# it and/or modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+# 
+# This software is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+*/
+.kk-sign-in-column-left .kk-form-section .kk-form-input{
+	margin-bottom:5px;
+}
+
+.kk-sign-in-column-left .kk-form-section .kk-form-input label{
+	margin-bottom:2px;
+}
+
+.kk-sign-in-column-left .kk-form-section .kk-form-input .kk-validation-msg {
+	margin-left:0px;
+	margin-top:3px;
+	float: left;
+}
+
+.kk-sign-in-column-left, .kk-sign-in-column-right{
+	float: left;
+	width: 49%;
+	vertical-align:text-top;
+}
+
+.kk-sign-in-column-left{
+	border-right: 1px solid #bfbfbf;
+}
+
+.kk-sign-in-column-right div{
+	padding-top: 20px;
+}
+
+#kk-sign-in-button-container{
+	margin-top: 10px;
+}
+
+#kk-sign-in-button-container a{
+	float: left;
+	margin-top: 4px;
+	vertical-align: text-bottom;
+}
+
+#kk-sign-in-button{
+	margin-right: 10px;
+}
+
+#kk-forgot-password a {
+	margin-left: 10px;
+}
+
+#kk-forgot-password-link {
+	margin: 0.75em !important;
+}
+
+.kkfp-notification-header{	
+	display: table;
+	width: 100%;
+}
+
+.kkfb-loading {
+	background-image:url('../images/loader.gif');
+	background-repeat: no-repeat;
+    height: 16px;
+	width: 16px;
+	margin: 0 auto;
+}
+
+#kkfb-wait {
+	width: 120px;
+	text-align: center;
+	padding: 0px;
+}
+
+.kkgp-loading {
+	background-image:url('../images/loader.gif');
+	background-repeat: no-repeat;
+    height: 16px;
+	width: 16px;
+	margin: 0 auto;
+}
+
+#kkgp-wait {
+	width: 120px;
+	text-align: center;
+	padding: 0px;
+}
+
+#kkfb-button, #kkgp-button {
+	cursor: pointer;
+	text-align: center !important;
+}
+
+#kk-social-status {
+	text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

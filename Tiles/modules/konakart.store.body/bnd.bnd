@@ -1,0 +1,6 @@
+Bundle-Name: Store Body Portlet
+Bundle-SymbolicName: konakart.store.body
+Bundle-Version: 8.9.0.0
+-metatype: *
+Web-ContextPath: /KKStoreBody
+-dsannotations: *

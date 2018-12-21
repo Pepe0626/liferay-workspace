@@ -1,0 +1,113 @@
+<%
+//(c) 2015 DS Data Systems UK Ltd, All rights reserved.
+//
+//DS Data Systems and KonaKart and their respective logos, are
+//trademarks of DS Data Systems UK Ltd. All rights reserved.
+//
+//The information in this document is free software;you can redistribute
+//it and/or modify it under the terms of the GNU Lesser General Public
+//License as published by the Free Software Foundation; either
+//version 2.1 of the License, or (at your option) any later version.
+//
+//This software is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+//Lesser General Public License for more details.
+%>
+
+<h1 id="kk-page-title"><%=getMsg("orders.tile.myorderhistory")%></h1>	
+<%if (orders == null || orders.length == 0){ %>
+	<div  class="kkos-item-area kk-rounded-corners">
+		<div class="kkos-item-area-header"></div>
+		<div class="kkos-items-message">
+			<%=getMsg("orders.tile.no.orders")%>.
+		</div>
+	</div>
+<% } else { %>
+	<div  class="kkos-item-area kk-rounded-corners">
+		<div class="kkos-item-area-header">     
+			<div class="kkos-item-area-header-top">
+				<span class="kkos-number-of-items kkos-navigation-element"><%=dataDesc.offset+1%>-<%=+dataDesc.offset + +numOrds%> <%=getMsg("orders.tile.of")%> <%=totalNumOrds%> <%=getMsg("orders.tile.orders")%></span>
+				<span class="kkos-show-per-page-area kkos-navigation-element">
+					<select class="kkos-show-per-page" id='<%=id+"-P1"%>' onchange="kk.changeOrdersPageSize('<%=id+"-P1"%>')">
+						<option value="5"<%=(maxOrdsPerPage==5)?' selected="selected"':''%>>5</option>
+						<option value="10"<%=(maxOrdsPerPage==10)?' selected="selected"':''%>>10</option>
+						<option value="20"<%=(maxOrdsPerPage==20)?' selected="selected"':''%>>20</option>
+						<option value="30"<%=(maxOrdsPerPage==30)?' selected="selected"':''%>>30</option>
+						<option value="50"<%=(maxOrdsPerPage==50)?' selected="selected"':''%>>50</option>
+					</select>
+					<%=getMsg("orders.tile.per.page")%>
+				</span>
+				<span class="kkos-pagination kkos-navigation-element">
+					<a class="kkos-pagination-element kkos-previous-items<%=(showBack)?"":"-inactive"%>" id='<%=id+"-B"%>'></a>
+					<% for ( var i = 0; i < pageList.length; i++) { %>
+						<% var page = pageList[i]; %>
+						<% if (page == currentPage) { %>
+							<a class="kkos-pagination-element kkos-page-num kkos-current" id='<%=id+"p-"+page%>'><%=page%></a>
+						<% } else { %>
+							<a class="kkos-pagination-element kkos-page-num" id='<%=id+"p-"+page%>'><%=page%></a>
+						<% } %>
+					<% }  %>         
+				   <a class="kkos-pagination-element kkos-next-items<%=(showNext)?"":"-inactive"%>" id='<%=id+"-F"%>'></a>
+				</span>
+			</div>
+		</div>
+		<% for (var i = 0; i < orders.length; i++){ %>
+			<% var order = orders[i];%>
+			<% var numItems = (order.orderProducts!=null)?order.orderProducts.length:0;%>
+			<% var statusClass = (order.statusText!=null&&order.statusText.toUpperCase() == "DELIVERED")?"kkos-shipped":"kkos-pending";%>
+			<div class="kkos-all-orders">
+				<table>
+					<tbody>
+						<tr>
+							<td class="kkos-narrow-col">#<%=order.id%></td>
+							<td class="kkos-narrow-col"><%=formatDate(order.datePurchased)%></td>
+							<td class="kkos-narrow-col"><%=getMsg("orders.tile.total")%>: <%=formatMoney(order.totalIncTax)%></td>
+							<td class="kkos-narrow-col"><div class="kkos-label <%=statusClass%>"><%=order.statusText%></div></td>
+							<td class="kkos-all-orders-icons">
+								<a class="kkos-view-order kkos-text-link fa fa-eye kkos-order-action" title='<%=getMsg("orders.tile.view")%>' id='<%="kkos-"+order.id%>' href='#'></a>
+								<a class="kkos-repeat-order kkos-text-link fa fa-repeat kkos-order-action" title='<%=getMsg("orders.tile.repeat")%>' id='<%="kkos-"+order.id%>' href='#'></a>
+								<a class="kkos-track-order kkos-text-link fa fa-truck kkos-order-action" title='<%=getMsg("orders.tile.track")%>' id='<%="kkos-"+order.id%>' href='#'></a>
+								<a class="kkos-invoice-order kkos-text-link fa fa-file-pdf-o kkos-order-action" title='<%=getMsg("orders.tile.invoice")%>' id='<%="kkos-"+order.id%>' href='#'></a>
+							</td>
+						</tr>
+					</tbody>
+					<%if (order.orderProducts != null && order.orderProducts.length > 0){ %>
+						<tr>
+							<td colspan="8">	    					
+								 <table>
+									<thead>
+										<tr>
+											<td class="kkos-wide-col"><%=getMsg("orders.tile.item")%></td>
+											<td class="kkos-narrow-col kk-right"><%=getMsg("orders.tile.quantity")%></td>
+											<td class="kkos-narrow-col kk-right"><%=getMsg("orders.tile.total")%></td>		    						
+										</tr>
+									</thead>
+									<tbody>				    						
+									<% for (var j = 0; j < order.orderProducts.length; j++){ %>	
+										<% var orderProd = order.orderProducts[j];%>
+										<tr>
+											<td><a class="kkos-order-item-link kkos-text-link" id='<%="kkos-"+orderProd.productId%>' href='#'><%=orderProd.name%></a></td>
+											<td class="kk-right"><%=orderProd.quantity%></td>
+											<%if (displayPriceWithTax) {%>
+												<td class="kk-right"><%=formatMoney(orderProd.finalPriceIncTax)%></td>
+											<%} else {%>
+												<td class="kk-right"><%=formatMoney(orderProd.finalPriceExTax)%></td>
+											<%}%>	
+										</tr>
+									<% } %>
+									</tbody>	    				
+								</table>
+							</td>
+						</tr>
+					<% } %>		    							    							    							    				
+				</table> 
+			</div>	
+		<% } %>
+		<div class="kk-form-buttons-wide">
+			<a id="kk-orders-back" class="kk-button kk-small-rounded-corners"><span><%=getMsg("orders.tile.back")%></span></a>
+		</div>
+	</div>		
+<% } %>
+
+

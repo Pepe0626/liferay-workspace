@@ -1,0 +1,228 @@
+<%
+//(c) 2015 DS Data Systems UK Ltd, All rights reserved.
+//
+//DS Data Systems and KonaKart and their respective logos, are
+//trademarks of DS Data Systems UK Ltd. All rights reserved.
+//
+//The information in this document is free software;you can redistribute
+//it and/or modify it under the terms of the GNU Lesser General Public
+//License as published by the Free Software Foundation; either
+//version 2.1 of the License, or (at your option) any later version.
+//
+//This software is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+//Lesser General Public License for more details.
+%>
+
+<%if (allowGooglePlusLogin) {%>
+	<script src="https://apis.google.com/js/client:platform.js?onload=gpStart" async defer></script>
+	<meta name="google-signin-client_id" content="<%=googlePlusId%>">
+<%}%>
+
+<script type="text/javascript">	
+
+<%if (allowFacebookLogin) {%>
+	
+	if (typeof(FB) == "undefined"){
+		window.fbAsyncInit = function() {
+			  FB.init({
+			    appId      : '<%=facebookId%>',
+			    version    : 'v2.5'
+			  });
+			  $("#kkfb-button").css("display","inline");
+			};
+	}	else {
+		$("#kkfb-button").css("display","inline");
+	}
+		
+	(function(d, s, id){
+	   var js, fjs = d.getElementsByTagName(s)[0];
+	   if (d.getElementById(id)) {return;}
+	   js = d.createElement(s); js.id = id;
+	   js.src = "//connect.facebook.net/en_US/sdk.js";
+	   fjs.parentNode.insertBefore(js, fjs);
+	 }(document, 'script', 'facebook-jssdk'));
+ 
+	function fbKKLogin(response) {
+		$("#kkfb-button").hide();
+		$("#kkfb-wait").text('<%=getMsg("login.tile.fb.processing")%>').addClass('kkfb-loading');
+		document.getElementById('loginToken').value = response.authResponse.accessToken;
+		document.getElementById('loginType').value = "FACEBOOK";
+      fbGetEmail();
+	};
+	
+	
+	function fbGetEmail() {
+	   FB.api('/me?fields=email', function(response) {
+	   	if (response.email == null || response.email.length == 0) {
+	   		document.getElementById('kk-social-status').innerHTML = '<%=getMsg("login.tile.fb.no.email")%>';
+	   		$("#kkfb-wait").text('').removeClass('kkfb-loading');
+	   		$("#kkfb-button").show();
+		} else {
+			$('#kk-ext-login-form').submit();
+		}	
+	   });
+	};
+<%}%>
+
+<%if (allowGooglePlusLogin) {%>
+	function gpStart() {
+		  gapi.load('auth2', function() {
+		    gapi.client.load('plus','v1').then(function() {
+		    	$("#kkgp-button").css("display","inline");
+		      });
+		  });
+	};
+	
+	var gpUpdate = function(authResult) {
+		 if (authResult.isSignedIn.get()) {
+		 	var user = authResult.currentUser.get();
+		   	if (user.getBasicProfile().getEmail() == null || user.getBasicProfile().getEmail().length == 0) {
+		   		document.getElementById('kk-social-status').innerHTML = '<%=getMsg("login.tile.gp.no.email")%>';
+		   		return;
+			}	
+			$("#kkgp-button").hide();
+			$("#kkgp-wait").text('<%=getMsg("login.tile.gp.processing")%>').addClass('kkgp-loading');
+			document.getElementById('loginToken').value = user.getAuthResponse().id_token;
+			document.getElementById('loginType').value = "GOOGLEPLUS";
+			$('#kk-ext-login-form').submit();
+		 } else if (authResult['error'] ||
+			authResult.currentUser.get().getAuthResponse() == null) {
+			document.getElementById('kk-social-status').innerHTML = '<%=getMsg("login.tile.gp.no.auth")%>';
+		 } else  {
+			 authResult.isSignedIn.listen(gpListener);
+			 authResult.signIn({
+				  'scope': 'profile email'
+			 });							
+		}
+	};
+	
+	var gpListener = function(loggedIn) {		
+		if (loggedIn == true) {
+			gpUpdate(gapi.auth2.getAuthInstance());
+		}
+	};
+<%}%>
+
+	$(function() {
+		$("#password").keydown(function (e){
+			if(e.keyCode == 13){
+				$('#kk-login-form').submit();
+			}
+		});
+	
+	
+<%if (allowGooglePlusLogin) {%>
+	$("#kkgp-button").click(function() {
+		var authResult = gapi.auth2.getAuthInstance();
+		if (authResult == null) {
+		      gapi.auth2.init({fetch_basic_profile: true,
+		          scope:'https://www.googleapis.com/auth/plus.login'}).then(
+		            function (){
+		            	authResult = gapi.auth2.getAuthInstance();
+		            	gpUpdate(authResult);
+		            });							
+		} else {
+        	gpUpdate(authResult);
+		}			
+	});	
+<%}%>
+<%if (allowFacebookLogin) {%>
+	$("#kkfb-button").click(function() {
+		FB.getLoginStatus(function(response) {
+		    if (response==null || response.authResponse == 'undefined' || response.status!='connected') {
+		    	FB.login(function(response){
+			     	if (response.status === 'connected') {
+			     		fbKKLogin(response);
+			       	} else if (response.status === 'not_authorized') {
+			         	document.getElementById('kk-social-status').innerHTML = '<%=getMsg("login.tile.fb.no.auth")%>';
+			       	} else {
+			         	document.getElementById('kk-social-status').innerHTML = '<%=getMsg("login.tile.fb.no.auth")%>';
+			       	}    
+		    	}, {scope: 'email'});
+			} else {
+				fbKKLogin(response);
+			}
+		});
+	});	
+<%}%>
+});			
+</script>
+
+
+			<%if (allowFacebookLogin || allowGooglePlusLogin) {%>
+				<form action="#" id='kk-ext-login-form' method="post">
+					<input id="loginToken" name="loginToken" type="hidden"/>
+					<input id="loginType" name="loginType" type="hidden"/>
+				</form>
+			<%}%>
+ 
+			<%if (allowFacebookLogin || allowGooglePlusLogin) {%> 
+				<h1 id="kk-page-title"><%=getMsg("login.tile.use.social.network")%></h1>
+    			<div id="kk-ext-login-area" class="kk-content-area kk-rounded-corners">
+					<div>
+					<%if (allowFacebookLogin) {%> 
+					<div class="kk-sign-in-column-left kk-centered">
+						<div id="kkfb-button" style="display: none"><img src="<%=imageBase%>/btn_facebook_login.png"></div>
+						<div id="kkfb-wait"></div>
+					</div>
+					<%}%>
+					<%if (allowFacebookLogin && allowGooglePlusLogin) {%> 
+					<div class="kk-sign-in-column-right kk-centered">
+						<div id="kkgp-button" style="display: none"><img src="<%=imageBase%>/btn_googleplus_login.png"></div>		
+						<div id="kkgp-wait"></div>																					
+					</div>
+					<%}%>
+					<%if (!allowFacebookLogin && allowGooglePlusLogin) {%> 
+					<div class="kk-sign-in-column-left kk-centered">
+						<div id="kkgp-button" style="display: none"><img src="<%=imageBase%>/btn_googleplus_login.png"></div>		
+						<div id="kkgp-wait"></div>																					
+					</div>
+					<%}%>
+					<div id="kk-social-status"></div>										
+					</div>
+    			</div>
+			<%}%>
+
+
+
+
+<h1 id="kk-page-title"><%=getMsg("login.tile.sign.in")%></h1>
+<div id="kk-login-area" class="kk-content-area kk-rounded-corners">
+	<div id="kk-error"></div>
+	<div class="kk-sign-in-column-left">
+		<form action="#" id="kk-login-form" method="post"> 
+			<div class="kk-form-section">
+				<h3><%=getMsg("login.tile.returning.customer")%></h3>
+				<div class="kk-form-input">
+					<label><%=getMsg("login.tile.email")%></label>
+					<input type="text" id="kkLoginUsername" name="kkLoginUsername">
+					<span class="kk-validation-msg"></span>	
+				</div>
+				<div class="kk-form-input">
+					<label><%=getMsg("login.tile.password")%></label>
+					<input type="password" id="kkPassword" name="kkPassword" autocomplete="off">
+					<span class="kk-validation-msg"></span>	
+				</div>
+				<div id="kk-sign-in-button-container">	
+					<a id="kk-continue-button" class="kk-button kk-small-rounded-corners"><span><%=getMsg("login.tile.sign.in")%></span></a>
+					<a  class="kk-text-link" id="kk-forgot-password-link"><%=getMsg("login.tile.forgotten.password")%></a>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="kk-sign-in-column-right kk-centered">
+		<h3><%=getMsg("login.tile.new.customer")%></h3>
+		<div>
+			<a  id="kk-sign-in-register" class="kk-button kk-small-rounded-corners"><span><%=getMsg("login.tile.register")%></span></a>											
+		</div>
+		<% var loginWithoutRegistration = false;%>
+		<%if (loginWithoutRegistration){ %>
+		<div>
+			<a  id="kk-sign-in-checkout" class="kk-button kk-small-rounded-corners"><span><%=getMsg("login.tile.checkout")%></span></a>											
+		</div>
+		<% } %>
+	</div>	
+</div>
+

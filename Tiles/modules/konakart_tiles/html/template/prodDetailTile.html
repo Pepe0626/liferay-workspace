@@ -1,0 +1,240 @@
+<%
+//(c) 2015 DS Data Systems UK Ltd, All rights reserved.
+//
+//DS Data Systems and KonaKart and their respective logos, are
+//trademarks of DS Data Systems UK Ltd. All rights reserved.
+//
+//The information in this document is free software;you can redistribute
+//it and/or modify it under the terms of the GNU Lesser General Public
+//License as published by the Free Software Foundation; either
+//version 2.1 of the License, or (at your option) any later version.
+//
+//This software is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+//Lesser General Public License for more details.
+%>
+
+<%if (prod == null){%>
+	<div id="kkpdt-product-area" class="kk-rounded-corners">
+		<%=getMsg("product.details.tile.product.not.found")%>
+	</div>
+<% } else { %>
+	<h1 id="kk-page-title"><%=prod.name%></h1>
+	<div id="kkpdt-product-area" class="kk-rounded-corners">
+		<div id="kkpdt-product-column-left">
+			<div id="kkpdt-product-images-container" class="kk-centered">
+				<div id="kkpdt-gallery" class="kkpdt-gallery">
+					<div class="kkpdt-gallery_output" id="kkpdt-gallery_output"></div>									
+					<div id="kkpdt-gallery_nav" class="kkpdt-gallery_nav"></div>																		
+					<div class="kk-clear"></div>
+				</div>
+			</div>
+			<div id="kkpdt-product-content">
+				<div id="kkpdt-product-content-tabs">
+					<% var descClass;%>
+					<% var revClass;%>
+					<%if (showReviewsTab == true){%>	
+						<% descClass = "";%>
+						<% revClass = 	"kkpdt-selected-product-content-tab";%>
+					<% } else { %>
+						<% descClass = "kkpdt-selected-product-content-tab";%>
+						<% revClass = 	"";%>
+					<%}%>
+					<div id="kkpdt-product-description-tab" class="<%=descClass%> kkpdt-product-content-tab kk-small-rounded-corners-top"><%=getMsg("product.details.tile.product.description")%></div>		
+					<div class="kkpdt-product-content-tab-spacer"></div>
+					<div id="kkpdt-product-specifications-tab" class="kkpdt-product-content-tab kk-small-rounded-corners-top"><%=getMsg("product.details.tile.specifications")%></div>
+					<div class="kkpdt-product-content-tab-spacer"></div>
+					<div id="kkpdt-product-reviews-tab" class="<%=revClass%> kkpdt-product-content-tab kk-small-rounded-corners-top"><%=getMsg("product.details.tile.reviews")%> (<%=prod.numberReviews%>)</div>
+					<div class="kkpdt-product-content-tab-filler"></div>
+				</div>
+				<div id="kkpdt-product-description">
+					<p style="clear:both"><%=prod.description%></p>		    			
+				</div>
+				<div id="kkpdt-product-specifications">	
+					<%if (prod.customAttrArray != null && prod.customAttrArray.length > 0){ %>
+						<table>
+							<thead>
+								<th colspan="2"><%=getMsg("product.details.tile.product.specifications")%></th>
+							</thead>
+							<tbody>						
+								<% for (var i = 0; i < prod.customAttrArray.length; i++){ %>
+									<% var attr =  prod.customAttrArray[i];%>	
+									<%if (attr.facetNumber == 0){ %>
+										<tr class="<%=(i%2==0)?"even":"odd"%>">
+											<td><%=(attr.getMsgCatKey==null)? attr.name:attr.msgCatKey%></td>
+											<td><%=attr.value%></td>
+										</tr>
+									<%}%>
+								<%}%>
+								</tbody>
+						</table>	
+					<% } else { %>
+						<p style="clear:both"><%=getMsg("product.details.tile.add.specifications")%></p>
+					<%}%>												
+				</div>    					
+ 	    		<div id="kkpdt-product-reviews"></div>				
+			</div>
+		</div>
+		<div id="kkpdt-product-column-right">
+			<div id="kkpdt-buying-details" class="kk-rounded-corners-top">						
+				<div id="kkpdt-product-price">
+					<% var saving; %>
+					<%if (displayPriceWithTax){%>
+						<%if (prod.specialPriceIncTax != null)	{%>
+							<% saving = prod.priceIncTax - prod.specialPriceIncTax;%>
+							<span class="kkpdt-product-price-old"><%=formatMoney(prod.priceIncTax)%></span>
+							<span class="kkpdt-product-price-current"><%=formatMoney(prod.specialPriceIncTax)%></span>
+						<%} else { %>
+							<span class="kkpdt-product-price-current"><%=formatMoney(prod.priceIncTax)%></span>		
+						<%}%>
+					<%} else { %>
+						<%if (prod.specialPriceExTax != null) {%>
+							<% saving = prod.priceExTax - prod.specialPriceExTax;%>
+							<span class="kkpdt-product-price-old"><%=formatMoney(prod.priceExTax)%></span>
+							<span class="kkpdt-product-price-current"><%=formatMoney(prod.specialPriceExTax)%></span>
+						<%} else { %>
+							<span class="kkpdt-product-price-current"><%=formatMoney(prod.priceExTax)%></span>
+						<%}%>
+					<%}%>
+				</div>
+				<div class="kkpdt-rating-big">
+					<%var rating = (prod.rating == null) ? 0 : formatNumber(prod.rating,0);%>
+					<a>
+						<%for (var i = 0; i < rating; i++){%>
+							<span class="kkpdt-star-big full"></span>
+						<%}%>
+						<%for (var i = rating; i < 5; i++) {%>
+							<span class="kkpdt-star-big empty"></span>
+						<%}%>
+						<span id="kkpdt-star-reviews-link">(<%=prod.numberReviews%>&nbsp;<%=getMsg("product.tile.reviews")%>)</span>
+					</a>
+				</div>	
+				<%if (prod.quantity > qtyWarn){%>
+					<div id="kkpdt-left-in-stock"><%=getMsg("product.details.tile.in.stock")%></div>  
+				<%} else if (prod.quantity <= qtyWarn && prod.quantity > 0){%>
+					<div id="kkpdt-left-in-stock"><%=getMsg("product.details.tile.limited.stock", prod.quantity)%></div>  
+				<%} else{%>
+					<div id="kkpdt-left-in-stock"><%=getMsg("product.details.tile.out.of.stock")%></div>  
+				<%}%>
+				<div class="kkpdt-labels">
+				   <%if (prod.type == 2 || prod.type == 4){%>
+						<div class="kkpdt-label kkpdt-free-shipping"><%=getMsg("product.tile.free.shipping")%></div>
+					<%}%>
+					<%if (saving != null){%>
+						<div class="kkpdt-label kkpdt-save"><%=getMsg("product.tile.save")%>&nbsp;<%=formatMoney(saving)%></div>
+					<%}%>
+				</div>		
+				<div id="kkpdt-product-options">
+					<%if (optContainers != null && optContainers.length > 0){ %>
+						<table class="kkpdt-product-option">  
+							<%for ( var j = 0; j < optContainers.length; j++) {%>
+								<%var optContainer = optContainers[j];%>
+								<tr>
+								<%if (optContainer.type == 0) {%> 
+									<td class="kkpdt-opt-name"><%=optContainer.name%></td>
+									<td class="kkpdt-opt-value">
+									<select class="kkpdt-opts" onchange="kk.optionChanged(this)">
+										<%for ( var k = 0; k < optContainer.opts.length; k++) {%>																	
+											<% var option =  optContainer.opts[k];%>	
+											<% var optCode =  (optContainer.code!=null && optContainer.code.length>0)?optContainer.code:null;%>
+											<% var valCode =  (option.code!=null && option.code.length>0)?option.code:null;%>
+											<% var combinedCode = "";%>
+											<%if (optCode != null && valCode != null){%>
+												 <%combinedCode = optCode+"_"+valCode+"_";%>
+											<%}%>											
+											<option id="<%=combinedCode%>" value="<%=optContainer.id+'-'+option.id%>"><%=option.formattedValue%></option>
+										<%}%>
+									</select>
+								<%} else if (optContainer.type == 1) {%>
+									<!-- TYPE_VARIABLE_QUANTITY -->
+									<td class="kkpdt-opt-name">
+										<%=optContainer.name+" "+optContainer.opts[0].formattedValue%>
+									</td> 
+									<td class="kkpdt-opt-value">
+										<%var id = optContainer.id+"-"+optContainer.type+"-"+optContainer.opts[0].id;%>
+										<input type="text" id="<%=id%>" class="kkpdt-opts-1"  maxlength="10"/>
+									</td>							
+								<%} else if (optContainer.type == 2) {%>
+									<!-- TYPE_CUSTOMER_PRICE -->
+									<td class="kkpdt-opt-name">
+										<%=optContainer.name+" "+optContainer.opts[0].formattedValue%>
+									</td> 
+									<td class="kkpdt-opt-value">
+										<%var id = optContainer.id+"-"+optContainer.type+"-"+optContainer.opts[0].id;%>
+										<input type="text" id="<%=id%>" class="kkpdt-opts-1"  maxlength="10"/>
+									</td>							
+								<%} else if (optContainer.type == 3) {%>
+									<!-- TYPE_CUSTOMER_TEXT -->
+									<td class="kkpdt-opt-name">
+										<%=optContainer.name+" "+optContainer.opts[0].formattedValue%>
+									</td> 
+									<td class="kkpdt-opt-value">
+										<%var id = optContainer.id+"-"+optContainer.type+"-"+optContainer.opts[0].id;%>
+										<input type="text" id="<%=id%>" class="kkpdt-opts-1"  maxlength="512"/>
+									</td>
+								<%}%>
+								</tr>
+							<%}%>						
+						</table>
+					<%}%>	
+				</div>	
+				<div class="kkpdt-product-buttons">
+					<% if (addToBasketEnabled){ %>
+						<select  id="kkpdt-prodQuantityId" class="kkpdt-add-to-cart-qty">
+							<%for (var i=1; i<31; i++) {  %>																	
+								<option value="<%=i%>"><%=i%></option>
+							<%}%>
+						</select> 
+						<a class="kkpdt-add-to-cart-button-big kk-button kk-small-rounded-corners" id='<%="kkpdt-"+prod.id%>'><%=getMsg("product.tile.add.to.cart")%></a>
+					<%}%>
+					<div class="kkpdt-add-to-wishlist-container">
+						<%if (wishListEnabled) { %>
+							<img class="kkpdt-plus-button" src="<%=imageBase%>/plus-button.png"/>
+							<a class="kkpdt-add-to-wishlist-prod-details"  id='<%="kkpdt-"+prod.id%>'><%=getMsg("product.tile.add.to.wishlist")%></a>
+						<%}%>
+					</div>
+				</div>			
+				<div id="kkpdt-notify-me-container">
+					<%if (productNotification == true) { %> 
+						<a  class="kkpdt-remove-notification" id='<%="kkpdt-"+prod.id%>'>
+							<%=getMsg("product.details.tile.remove")%> <b><%=prod.name%></b> <%=getMsg("product.details.tile.dontnotifyme")%>
+						</a>
+					<% } else { %>
+						<a  class="kkpdt-add-notification" id='<%="kkpdt-"+prod.id%>'>
+							<%=getMsg("product.details.tile.notifyme")%> <b><%=prod.name%></b>
+						</a>
+					<% } %>				
+				</div>  					
+			</div>
+			<div id="kkpdt-share-this" class="kk-rounded-corners-bottom">
+				<span id="kkpdt-share-this-label"><%=getMsg("product.details.tile.share.this")%>:</span>
+				<div class="addthis_toolbox addthis_default_style ">
+				    <a class="addthis_button_facebook" style="cursor:pointer"></a> 
+				    <a class="addthis_button_twitter" style="cursor:pointer"></a> 
+				    <a class="addthis_button_email" style="cursor:pointer"></a>
+				    <a class="addthis_button_print" style="cursor:pointer"></a>
+				    <a class="addthis_button_compact" style="cursor:pointer"></a>
+ 				</div>				 
+				<script>
+					$(function() {
+						var script = 'http://s7.addthis.com/js/250/addthis_widget.js#domready=1';
+						if (window.addthis) {
+						    window.addthis = null;
+						    window._adr = null;
+						    window._atc = null;
+						    window._atd = null;
+						    window._ate = null;
+						    window._atr = null;
+						    window._atw = null;
+						}
+						$.getScript(script);
+					});
+				</script>
+			</div>
+			<div id="kkpdt-related"></div>
+			<div id="kkpdt-also-purchased"></div>
+		</div>	
+	</div>		
+<% } %>    	
+

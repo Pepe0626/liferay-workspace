@@ -1,0 +1,385 @@
+/*
+# (c) 2015 DS Data Systems UK Ltd, All rights reserved.
+#
+# DS Data Systems and KonaKart and their respective logos, are 
+# trademarks of DS Data Systems UK Ltd. All rights reserved.
+#
+# The information in this document below this text is free software; you can redistribute 
+# it and/or modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+# 
+# This software is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+*/
+
+/*
+# Common
+*/
+
+.kkct-shopping-cart-item-option{
+	font-size: 10px;
+	font-style: italic;  
+}
+
+/*
+# Popup Tile
+*/
+#kkpct-shopping-cart:hover{
+	cursor: pointer;
+}
+
+.kkpct-top-bar-menu-item{
+	/*float: left; */
+	display: inline-block;
+	margin: 0 0 0 1.1em;
+}
+
+.kkpct-top-bar-menu-icon  #kkpct-basket-items {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 0.75rem;
+	vertical-align: text-top;
+}
+
+#kkpct-shopping-cart-container{
+	display: none; 
+	cursor: pointer;
+	z-index: 1000000;
+}
+
+#kkpct-shopping-cart-mouseover-shadow{
+	right: -4px;
+	top: 4px;
+}
+
+.kkpct-slide-out-shadow{
+	background-color: #ccc;
+	behavior: url('../script/pie/PIE.htc');
+     -moz-border-radius: 0 7px 0 0;
+    -webkit-border-radius: 0 7px 0 0;
+    -khtml-border-radius: 0 7px 0 0;
+    border-radius: 0 7px 0 0;
+	border-right: 3px;
+	height: 18px;
+	width: 3px;
+	position: absolute;
+}
+
+#kkpct-shopping-cart-contents{
+	right: -1px;
+	top: 19px;
+}
+
+#kkpct-shopping-cart-items{
+	border-bottom: 1px #cfcfcf solid;
+	padding-bottom: 5px;
+	overflow-y:auto;
+	max-height:500px;
+	overflow-x:hidden;
+}
+
+.kkpct-shopping-cart-item-title{
+	color: #000;
+	display: inline-block;
+	font-weight: bold;
+	margin-top: 5px;
+	overflow: hidden;
+	text-decoration: none;
+	width: 150px;
+}
+
+.kkpct-shopping-cart-item-title:hover	{
+	text-decoration: underline;
+}
+
+.kkpct-shopping-cart-item-price{
+	margin-left: 90px;  
+	position: relative;
+}
+
+.kkpct-subtotal{
+	color: #333;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 10px 0 5px 0;
+}
+
+.kkpct-subtotal-label{
+	float: left;
+	padding-top: 5px;
+	text-transform: uppercase;
+	text-align: left;
+	width: 90px;
+}
+
+.kkpct-subtotal-amount{
+	float: left;
+	padding-top: 5px;
+}
+
+#kkpct-shopping-cart-checkout-button{
+	float: right;
+	font-weight: normal;
+}
+
+
+.kkpct-shadow {
+	-moz-box-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+	-webkit-box-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+	box-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+}
+
+.kkpct-slide-out-contents{
+	background-color: #fff;
+	behavior: url('../script/pie/PIE.htc');
+     -moz-border-radius: 10px 0 10px 10px;
+    -webkit-border-radius: 10px 0 10px 10px;
+    -khtml-border-radius: 10px 0 10px 10px;
+    border-radius: 10px 0 10px 10px;
+	border: 1px #cfcfcf solid; 
+	line-height: 15px;
+	padding: 10px;
+	position: absolute;
+	top: 23px;
+	width: 250px;
+	z-index: -1;
+}
+
+.kkpct-shopping-cart-mouseover{
+	background-color: #fff;
+	border-top: 1px #cfcfcf solid;
+	border-left: 1px #cfcfcf solid;
+	border-right: 1px #cfcfcf solid;
+	height: 12px;
+	margin: -5px -5px -5px 5px !important;
+	overflow: visible;
+	position: relative;
+	padding: 4px;
+	width: auto;
+}
+
+.kkpct-shopping-cart-item{
+	display: table;
+	height: 1%; /* For IE 7 */
+	*display: block; /* For IE 7 */
+	text-align: left;
+	width:240px;	
+}
+
+.kkpct-shopping-cart-item img{
+	float: left;
+	height: 60px;
+	margin: 7px 15px 5px 15px;
+	/*width: 60px;*/
+}
+
+/*
+# Manage Cart
+*/
+
+#kkmct-container table .kkmct-narrow-col{
+	width: 20%;
+}
+
+#kkmct-container table .kkmct-wide-col{
+	width: 40%;
+}
+
+.kkmct-items-left{
+	background: url('../images/items-left-circle.png');
+	color: #fff;
+	font-size: 11px;
+	height: 29px;
+	line-height: 11px;
+	padding-top: 5px;	
+	text-align: center;
+	width: 34px;
+	z-index: 100;
+	right: 5%;
+	top: 0.5em;
+	margin: 0px 0px 0px 0px;
+	display: block;
+}
+
+.kkmct-red {
+	background: url('../images/red-circle.png');
+}
+
+#kkmct-container .kkmct-product-image{
+	height: auto;
+	display: block;
+	margin: 0 auto;
+	max-width: 60px;
+	width: 80%;
+}
+
+#kkmct-container .kkmct-text-link{
+	margin-left:0px;
+	width: 100%;
+	float: left;
+	margin-bottom: 0.25em
+}
+
+.kkmct-qty-input{
+	width: 1.5em !important;	
+}
+
+.kkmct-update-button{
+	background: #000;
+	display: inline-block;
+	font-size: 9px;
+	margin: 2px 0 0 10px;
+	padding: 0 10px;
+	color:#fff;
+	text-transform: uppercase;
+	display:none;
+}
+
+.kkmct-update-button:hover{
+	text-decoration: underline;
+	color:#fff;
+	cursor:pointer;
+}
+
+#kkmct-container thead td {
+	border-bottom: 1px solid #dadada;
+	font-weight: bold;
+}
+
+#kkmct-container table thead tr td{
+	padding-top: 0;
+}
+
+#kkmct-container table td {
+	width: auto;
+}
+
+#kkmct-container input[type=text]{
+	width: 30px;
+}
+
+#kkmct-container table a{
+	font-weight: bold;
+}
+
+#kkmct-container table .kkmct-total-price{
+	font-weight: bold;
+}
+
+#kkmct-cost-overview{
+	border-bottom: 1px solid #dadada;
+	border-top: 1px solid #dadada;
+	width: 100%;
+	margin: 10px 0 10px 0;
+	margin: 5px 0 5px 0;
+}
+
+.kkmct-cost-overview-amounts{
+	font-weight: bold;
+}
+
+#kkmct-checkout-button{
+	float: right;
+}
+
+.kkmct-discount{
+	color: #cc0000;
+}
+
+.kkmct-remove{
+	color: #999;
+	font-size: 1.25em !important;
+	margin: 0 0 0 0.5em;
+}
+
+.kkmct-remove:hover{
+	text-decoration: none;
+}
+
+.kkmct-product-image:hover{
+	cursor: pointer;
+}
+
+.kkmct-text-link {
+	color: #1a6baa !important;
+	cursor:pointer;
+}
+
+/*
+* Coupon entry
+*/
+
+#kkmct-promotion-codes-container{
+	width: 100%;
+}
+
+#kkmct-promotion-codes{
+	padding: 4px 0 0 10%;
+}
+
+#kkmct-promotion-codes #kkmct-promotion-codes-container{
+	display:table;
+}
+
+#kkmct-promotion-codes #kkmct-promotion-codes-container .kkmct-promotion-codes-field{
+	display: table-row;	
+	margin: 4px 0;
+}
+
+#kkmct-promotion-codes label{
+	float: left;
+	width: 30%;	
+}
+
+#kkmct-promotion-codes input[type=text]{
+	width: 45% !important;
+}
+
+#kkmct-promotion-codes .kk-validation-msg {
+	color: #A00000;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

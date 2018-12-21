@@ -1,0 +1,6 @@
+Bundle-Name: Vertical Carousel Portlet
+Bundle-SymbolicName: konakart.vertical.carousel
+Bundle-Version: 8.9.0.0
+-metatype: *
+Web-ContextPath: /KKVerticalCarousel
+-dsannotations: *

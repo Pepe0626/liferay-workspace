@@ -1,0 +1,21 @@
+<%@ include file="/init.jsp" %>
+
+<script>	
+	kk.init2();
+	</script>
+<div id="kk-portlet-body">
+	
+<div id="kk-page-container">
+	    <div id="kk-page">
+
+			<div id="kk-products-container">
+				<div id="facets-tile"></div>
+				<div id="kk-content" class="narrow">
+					<div id="products-tile"></div>	
+				</div>	
+			</div>
+			<div id="body-tile"></div>				
+		</div>					
+	</div>								
+
+</div>

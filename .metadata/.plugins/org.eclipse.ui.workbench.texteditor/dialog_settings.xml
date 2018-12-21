@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="false" key="isRegEx"/>
+		<item value="kkpdtContext" key="selection"/>
+		<item value="false" key="casesensitive"/>
+		<item value="false" key="wholeword"/>
+		<list key="findhistory">
+			<item value="&quot;body-tile"/>
+			<item value="if (prod.quantity &gt; qtyWarn)"/>
+			<item value="prod"/>
+			<item value="http://www.konakart.com/"/>
+		</list>
+		<list key="replacehistory">
+		</list>
+	</section>
+</section>

@@ -1,0 +1,182 @@
+<project name="KKTiles" default="build" basedir=".">
+
+	<path id="run.path">
+		<pathelement location="./gensrc/bin" />
+	</path>
+
+	<path id="compress.path">
+		<fileset dir="./compression" includes="**/*.jar" />
+	</path>
+
+	<target name="clean"
+	        description="Clears away everything that's created during a build">
+		<echo message="Cleanup..." />
+		<delete includeEmptyDirs="true" failonerror="false">
+			<fileset dir="./gensrc" />
+		</delete>
+	</target>
+
+	<target name="createGensrc"
+	        description="Creates directories for generated source">
+		<echo message="Creating directories for generated source..." />
+		<mkdir dir="./gensrc/" />
+		<mkdir dir="./gensrc/script/" />
+		<mkdir dir="./gensrc/html/" />
+		<mkdir dir="./gensrc/styles/" />
+		<mkdir dir="./gensrc/images/" />
+		<mkdir dir="./gensrc/bin/" />
+		<mkdir dir="./buildlog/" />
+	</target>
+
+	<target name="compileBuildUtils" description="Compiles TileBuildUtils.java">
+		<echo message="Compiling TileBuildUtils" />
+		<javac srcdir="./src/com/dsdata/util"
+		       destdir="./gensrc/bin"
+		       includeantruntime="false"
+		       encoding="UTF-8"
+		       fork="yes"
+		       memoryMaximumSize="256m"
+		       includes="*.java">
+		</javac>
+	</target>
+
+	<target name="minimizeJS" description="Minimizes the JavaScript">
+		<echo message="Creating JavaScript file from templates" />
+		<java classname="com.dsdata.util.TileBuildUtils"
+		      fork="true"
+		      failonerror="true"
+		      maxmemory="128m"
+		      output="./buildlog/CreateTemplateJSFile.log"
+		      timeout="30000">
+			<arg value="create-template-js" />
+			<arg value="-i" />
+			<arg value="./html/template" />
+			<arg value="-o" />
+			<arg value="./gensrc/script/kk-template-gen.js" />
+			<classpath refid="run.path" />
+		</java>
+
+		<echo message="Creating single JavaScript file" />
+		<java classname="com.dsdata.util.TileBuildUtils"
+		      fork="true"
+		      failonerror="true"
+		      maxmemory="128m"
+		      output="./buildlog/CreateSingleJSFile.log"
+		      timeout="30000">
+			<arg value="create-single-js" />
+			<arg value="-i" />
+			<arg value="./script" />
+			<arg value="-o" />
+			<arg value="./gensrc/script/kk-tile-gen.js" />
+			<classpath refid="run.path" />
+		</java>
+
+		<echo message="Minimizing JavaScript" />
+		<java jar="./compression/compiler.jar"
+		      fork="true"
+		      failonerror="true"
+		      maxmemory="128m"
+		      output="./buildlog/CompressJS.log"
+		      timeout="30000">
+			<arg value="--js" />
+			<arg value="./gensrc/script/kk-tile-gen.js" />
+			<arg value="--js_output_file" />
+			<arg value="./gensrc/script/kk-tile-gen.min.js" />
+			<classpath refid="compress.path" />
+		</java>
+	</target>
+
+	<target name="minimizeCSS" description="Minimizes the CSS">
+		<echo message="Creating single CSS file" />
+		<java classname="com.dsdata.util.TileBuildUtils"
+		      fork="true"
+		      failonerror="true"
+		      maxmemory="128m"
+		      output="./buildlog/CreateSingleJSFile.log"
+		      timeout="30000">
+			<arg value="create-single-css" />
+			<arg value="-i" />
+			<arg value="./styles" />
+			<arg value="-o" />
+			<arg value="./gensrc/styles/kk-tile-gen.css" />
+			<classpath refid="run.path" />
+		</java>
+
+		<echo message="Minimizing CSS" />
+		<java jar="./compression/yuicompressor-2.4.8.jar"
+		      fork="true"
+		      failonerror="true"
+		      maxmemory="128m"
+		      output="./buildlog/CompressCSS.log"
+		      timeout="30000">
+			<arg value="./gensrc/styles/kk-tile-gen.css" />
+			<arg value="-o" />
+			<arg value="./gensrc/styles/kk-tile-gen.min.css" />
+			<classpath refid="compress.path" />
+		</java>
+	</target>
+
+	<target name="processHTML" description="Processes the HTML test files">
+		<echo message="Processing HTML files" />
+		<java classname="com.dsdata.util.TileBuildUtils"
+		      fork="true"
+		      failonerror="true"
+		      maxmemory="128m"
+		      output="./buildlog/CreateSingleJSFile.log"
+		      timeout="30000">
+			<arg value="process-html" />
+			<arg value="-i" />
+			<arg value="./html" />
+			<arg value="-o" />
+			<arg value="./gensrc/html" />
+			<classpath refid="run.path" />
+		</java>
+	</target>
+
+	<target name="copyJS"
+	        description="Copy required JS files to the Gensrc area">
+		<echo message="Copying JS files" />
+		<copy todir="./gensrc/script">
+			<fileset dir="./script/">
+				<include name="polyglot.js" />
+				<include name="ddpowerzoomer.js" />
+				<include name="jquery.jcarousel.min.js" />
+				<include name="jquery.touchSwipe.min.js" />
+				<include name="jquery.konakart.min.js" />
+				<include name="jquery.ui.datepicker-en.js" />
+				<include name="pie/**/*" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="copyCSS"
+	        description="Copy required CSS files to the Gensrc area">
+		<echo message="Copying CSS files" />
+		<copy todir="./gensrc/styles">
+			<fileset dir="./styles/">
+				<include name="jcarousel.css" />
+				<include name="font-awesome/**/*" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="copyImages"
+	        description="Copy required image files to the Gensrc area">
+		<echo message="Copying image files" />
+		<copy todir="./gensrc/images">
+			<fileset dir="./images/">
+				<include name="**/*" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="tidyUp" description="Removed not needed files">
+		<echo message="Tidy Up" />
+		<delete file="./gensrc/script/kk-tile-gen.js" />
+		<delete file="./gensrc/styles/kk-tile-gen.css" />
+	</target>
+
+	<target name="build"
+	        description="Creates the kit"
+	        depends="clean, createGensrc, compileBuildUtils, minimizeJS, minimizeCSS, processHTML, copyJS, copyCSS, copyImages, tidyUp" />
+</project>

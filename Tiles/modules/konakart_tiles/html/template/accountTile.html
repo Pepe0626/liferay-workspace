@@ -1,0 +1,210 @@
+<%
+//(c) 2015 DS Data Systems UK Ltd, All rights reserved.
+//
+//DS Data Systems and KonaKart and their respective logos, are
+//trademarks of DS Data Systems UK Ltd. All rights reserved.
+//
+//The information in this document is free software;you can redistribute
+//it and/or modify it under the terms of the GNU Lesser General Public
+//License as published by the Free Software Foundation; either
+//version 2.1 of the License, or (at your option) any later version.
+//
+//This software is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+//Lesser General Public License for more details.
+%>
+
+<h1 id="kk-page-title"><%=getMsg("account.tile.myaccountinfo")%></h1>
+<div class="kk-content-area kk-rounded-corners">
+	<div id="kk-error"></div>
+	<div id="kk-message"></div>
+	<div id="kkat-column-left">
+		<div id="personal-info" class="kkat-area">
+			<div class="kkat-area-header">
+				<h3><%=getMsg("account.tile.primary.address")%></h3>
+			</div>	
+			<div class="kkat-area-content">
+			<%if (addresses != null && addresses.length > 0){ %>
+				<%if (kk.isNoAddress()){ %>
+					<%=customer.emailAddr %><br/>
+					<a  id="kk-first-addr" class="kkat-text-link"><%=getMsg("account.tile.add.addr")%></a>
+				<%} else {%>
+					<%=removeCData(addresses[0].formattedAddress)%>
+					<br/><br/><%=customer.emailAddr %>
+					<br/><%=customer.telephoneNumber %>
+				<% } %>
+			<% } %>
+			</div>	
+		</div>	
+		<%if (downloads != null && downloads.length > 0){ %>
+			<div id="kkat-downloads" class="kkat-area">
+				<div class="kkat-area-header">
+					<h3><%=getMsg("account.tile.downloads")%></h3>	 
+				</div>
+				<table>
+					<% for (var i = 0; i < downloads.length; i++){ %>
+						<% var download = downloads[i];%>
+						<%if (download.product != null) {%>
+						<tr>
+							<td ><%=download.product.name%></td>
+							<td ><%=download.product.model%></td>
+							<td ><%=getMsg("account.tile.downloaded",download.timesDownloaded)%></td>
+							<%if (download.expirationDate != null){ %>
+								<td  width="80"><%=formatDate(download.expirationDate)%></td>
+							<%}%>
+							<td  align="right">
+								<span class="kkat-download kk-button-small kk-small-rounded-corners" id='<%="kkat-"+download.id%>'><%=getMsg("account.tile.download")%></span>					
+							</td>
+						</tr>
+						<%}%>
+					<%}%>
+				</table>
+			</div>	
+		<% } %>			
+		<%if (orders != null && orders.length > 0){ %>	
+			<div id="kkat-last-orders" class="kkat-area">
+				<div class="kkat-area-header">
+					<h3><%=getMsg("account.tile.last.orders")%></h3><a id="kkat-all-orders" class="kkat-option kkat-text-link"><%=getMsg("account.tile.showallorders")%></a>	 
+				</div>	
+				<% for (var i = 0; i < orders.length; i++){ %>
+					<% var order = orders[i];%>
+					<% var numItems = (order.orderProducts!=null)?order.orderProducts.length:0;%>
+					<% var statusClass = (order.statusText!=null&&order.statusText.toUpperCase() == "DELIVERED")?"kkat-shipped":"kkat-pending";%>
+					<div class="kkat-last-order">
+						<table>
+							<tbody>
+								<tr>
+									<td>#<%=order.id%></td>
+									<td><%=formatDate(order.datePurchased)%></td>
+									<td><%=getMsg("account.tile.total")%>: <%=formatMoney(order.totalIncTax)%></td>
+									<td><div class="kkat-label <%=statusClass%>"><%=order.statusText%></div></td>
+									<td class="kkat-last-order-icons">
+										<a class="kkat-view-order kkat-text-link fa fa-eye kkat-order-action" title='<%=getMsg("account.tile.view")%>' id='<%="kkat-"+order.id%>' href='#'></a>
+										<a class="kkat-repeat-order kkat-text-link fa fa-repeat kkat-order-action" title='<%=getMsg("account.tile.repeat")%>' id='<%="kkat-"+order.id%>' href='#'></a>
+										<a class="kkat-track-order kkat-text-link fa fa-truck kkat-order-action" title='<%=getMsg("account.tile.track")%>' id='<%="kkat-"+order.id%>' href='#'></a>
+										<a class="kkat-invoice-order kkat-text-link fa fa-file-pdf-o kkat-order-action" title='<%=getMsg("account.tile.invoice")%>' id='<%="kkat-"+order.id%>' href='#'></a>
+									</td>
+								</tr>
+							</tbody>
+							<%if (order.orderProducts != null && order.orderProducts.length > 0){ %>
+								<tr>
+									<td colspan="8">	    					
+										 <table>
+											<thead>
+												<tr>
+													<td class="kkat-wide-col"><%=getMsg("account.tile.item")%></td>
+													<td class="kkat-narrow-col kk-right"><%=getMsg("account.tile.quantity")%></td>
+													<td class="kkat-narrow-col kk-right"><%=getMsg("account.tile.total")%></td>		    						
+												</tr>
+											</thead>
+											<tbody>				    						
+											<% for (var j = 0; j < order.orderProducts.length; j++){ %>	
+												<% var orderProd = order.orderProducts[j];%>
+												<tr>
+													<td><a class="kkat-order-item-link kkat-text-link" id='<%="kkat-"+orderProd.productId%>' href='#'><%=orderProd.name%></a></td>
+													<td class="kk-right"><%=orderProd.quantity%></td>
+													<%if (displayPriceWithTax) {%>
+														<td class="kk-right"><%=formatMoney(orderProd.finalPriceIncTax)%></td>
+													<%} else {%>
+														<td class="kk-right"><%=formatMoney(orderProd.finalPriceExTax)%></td>
+													<%}%>	
+												</tr>
+											<% } %>
+											</tbody>	    				
+										</table>
+									</td>
+								</tr>
+							<% } %>		    							    							    							    				
+						</table> 
+					</div>	
+				<% } %>
+			</div>																	
+		<% } %>
+	</div>	 
+	<%if (customer != null && customer.type != 2) { %>
+		<div id="kkat-column-right">
+			<div id="addressbook" class="kkat-area">
+				<h3><%=getMsg("account.tile.personal.information")%></h3>
+				<div class="kkat-area-content">
+					<%if (loginType != null && (loginType=='GOOGLEPLUS' || loginType=='FACEBOOK')){ %>
+						<a  id="kk-send-password" class="kkat-text-link"><%=getMsg("account.tile.sendpassword")%></a>
+					<% } %>
+					<a  id="kk-manage-email" class="kkat-text-link"><%=getMsg("account.tile.changeemail")%></a>
+					<a  id="kk-manage-password" class="kkat-text-link"><%=getMsg("account.tile.changepassword")%></a>
+					<a  id="kk-manage-personal-info" class="kkat-text-link"><%=getMsg("account.tile.changeaccountinfo")%></a>
+					<%if (!kk.isNoAddress()){ %>
+						<a  id="kk-manage-address-book" class="kkat-text-link"><%=getMsg("account.tile.changeaddrbook")%></a>
+					<% } %>
+				</div>
+			</div>
+			<div id="settings" class="kkat-area">
+				<h3><%=getMsg("account.tile.notifications")%></h3>
+				<div class="kkat-area-content">
+					<a  id="kk-manage-newsletter" class="kkat-text-link"><%=getMsg("account.tile.subscribenewsletter")%></a>
+					<a  id="kk-manage-notifications" class="kkat-text-link"><%=getMsg("account.tile.changeprodnotlist")%></a>
+				</div>
+			</div>
+		</div>   	
+	<% } %>
+</div>
+
+  	    	<div id="kk-send-email-dialog" title="<%=getMsg('account.tile.confirmation')%>" class="kk-content-area kk-rounded-corners">
+	    		<div>
+					<div class="kk-form-section">
+						<div class="kk-form-section-title no-margin">
+							<%=getMsg("account.tile.sendpassword.confirmation",customer.emailAddr)%>									
+						</div>
+						<div class="kkat-confirm-dialog-buttons">
+							<a onclick='kkCloseConfirmDialog();' class="kk-button kk-small-rounded-corners">
+								<span ><%=getMsg("account.tile.close")%></span>
+							</a>															
+							<a onclick='kkSendEmail();' class="kk-button kk-small-rounded-corners">
+								<span ><%=getMsg("account.tile.confirm")%></span>
+							</a>
+						</div>															
+					</div>
+		    	</div>
+		    </div>
+
+			<form action="#" id='kkSendPasswordForm' method="post">
+				<input id="kkEmailAddr" type="hidden"/>
+			</form>
+		    
+<script type="text/javascript">	
+
+function kkCloseConfirmDialog() {
+	$("#kk-send-email-dialog").dialog('close');
+}
+
+function kkSendEmail() {
+	document.getElementById('kkEmailAddr').value = "<%=customer.emailAddr%>";
+	$('#kkSendPasswordForm').submit();
+	$("#kk-send-email-dialog").dialog('close');
+}
+
+$(function() {
+			
+	$("#kk-send-email-dialog").dialog({
+		autoOpen: false,
+		width: "90%",
+		modal: "true",
+		hide: "blind",
+		open: function( event, ui ) {
+			var width = $( "#kk-send-email-dialog" ).width();
+			if (width > 400) {
+				$( "#kk-send-email-dialog" ).dialog( "option", "width", 400 );
+			}
+		}
+	});
+	
+	$("#kk-send-password").click(function() {
+		$("#kk-send-email-dialog").dialog( "open" );
+		return false;
+	});
+	
+});
+
+</script>
+			    
+	

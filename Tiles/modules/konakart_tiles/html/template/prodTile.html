@@ -1,0 +1,111 @@
+<%
+//(c) 2015 DS Data Systems UK Ltd, All rights reserved.
+//
+//DS Data Systems and KonaKart and their respective logos, are
+//trademarks of DS Data Systems UK Ltd. All rights reserved.
+//
+//The information in this document is free software;you can redistribute
+//it and/or modify it under the terms of the GNU Lesser General Public
+//License as published by the Free Software Foundation; either
+//version 2.1 of the License, or (at your option) any later version.
+//
+//This software is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+//Lesser General Public License for more details.
+%>
+
+<%
+var rand = Math.floor((Math.random() * 10000) + 1);
+var count = 0;
+%>
+<% if (style == "kkpt-single"){ %>
+	<div class="kkpt-single">
+<%}%>
+<div class="kkpt-item">
+	<% if (style != "kkpt-small"){ %>
+		<% if (title != null && title.length > 0){ %>
+			<div class="kkpt-title"><%=title%></div>
+		<%}%>
+		<div class="kkpt-item-over" id='<%=rand+"."+ count++ +"-"+prod.id%>'>
+			<% if (prod.quantity > qtyWarn){ %>
+				<div class="kkpt-items-left kkpt-green"><%=getMsg("product.tile.in.stock")%></div>
+			<%} else if (prod.quantity  <= qtyWarn && prod.quantity  > 0) { %>
+				<div class="kkpt-items-left kkpt-amber"><%=prod.quantity%><%=getMsg("product.tile.limited.stock")%></div>
+			<%} else { %>
+				<div class="kkpt-items-left kkpt-red"><%=getMsg("product.tile.out.of.stock")%></div>
+			<%}%>
+	  	
+			<div class="kkpt-item-buttons-container">
+			  <div class="kkpt-item-buttons kk-centered">
+				<% if (addToBasketEnabled == true){ %>
+					<a class="kkpt-add-to-cart-button kk-button kk-small-rounded-corners"  id='<%=rand+"."+ count++ +"-"+prod.id%>'><%=getMsg("product.tile.add.to.cart")%></a>
+				<%}%>
+				<% if (wishListEnabled == true){ %>
+					<div class="kkpt-add-to-wishlist-container kk-centered">
+					  <span>
+						<img class="kkpt-plus-button" src="<%=imageBase%>/plus-button.png" border="0" alt='<%=getMsg("product.tile.add.to.wishlist")%>'
+						title='<%=getMsg("product.tile.add.to.wishlist")%>' />
+						<a class="kkpt-add-to-wishlist"  id='<%=rand+"."+ count++ +"-"+prod.id%>'><%=getMsg("product.tile.add.to.wishlist")%></a>
+					  </span>
+					</div>
+				<%}%>
+			  </div>
+			</div>
+			<div class="kkpt-item-overlay"></div>
+		</div>
+	<%}%>
+	<img class="kkpt-item-img" id='<%=rand+"."+ count++ +"-"+prod.id%>' src="<%=prodImage%>" border="0" alt="<%=prod.name%>" title="<%=prod.name%>" />
+	<a class="kkpt-item-title"  id='<%=rand+"."+ count++ +"-"+prod.id%>'><%=prod.name%></a>
+	<div class="kkpt-rating">
+		<%var rating = (prod.rating == null) ? 0 : formatNumber(prod.rating,0);%>
+        <%if (prod.numberReviews > 0) {%>
+			<a class="kkpt-item-reviews"  id='<%=rand+"."+ count++ +"-"+prod.id%>'>
+        <%}%>
+        <%for (var i = 0; i < rating; i++){%>
+            <span class="kkpt-star full"></span>
+        <%}%>
+        <%for (var i = rating; i < 5; i++){%>
+            <span class="kkpt-star empty"></span>
+        <%}%>
+        <span class="kkpt-review-text"><%="(" + prod.numberReviews + " " + getMsg("product.tile.reviews") + ")"%></span>
+        <%if (prod.numberReviews > 0) {%>
+            </a>
+        <%}%>
+	</div>
+	<div class="pricing">
+		<% var saving; %>
+		<%if (displayPriceWithTax){%>
+			<%if (prod.specialPriceIncTax != null)	{%>
+				<% saving = prod.priceIncTax - prod.specialPriceIncTax;%>
+				<div class="kkpt-price kkpt-price-old"><%=formatMoney(prod.priceIncTax)%></div>
+				<div class="kkpt-price"><%=formatMoney(prod.specialPriceIncTax)%></div>
+			<%} else { %>
+				<div class="kkpt-price"><%=formatMoney(prod.priceIncTax)%></div>		
+			<%}%>
+		<%} else { %>
+			<%if (prod.specialPriceExTax != null) {%>
+				<% saving = prod.priceExTax - prod.specialPriceExTax;%>
+				<div class="kkpt-price kkpt-price-old"><%=formatMoney(prod.priceExTax)%></div>
+				<div class="kkpt-price"><%=formatMoney(prod.specialPriceExTax)%></div>
+			<%} else { %>
+				<div class="kkpt-price"><%=formatMoney(prod.priceExTax)%></div>
+			<%}%>
+		<%}%>
+	</div>
+	<% if (style != "kkpt-small"){ %>	
+	    <%if (prod.type == 2 || prod.type == 4){%>
+			<%if (saving == null) {%>
+				<div class="kkpt-label kkpt-free-shipping"><%=getMsg("product.tile.free.shipping")%></div>
+			<%} else { %>
+				<div class="kkpt-label kkpt-free-shipping"><%=getMsg("product.tile.free.shipping.wrap")%></div>
+			<%}%>
+		<%}%>		
+		<%if (saving != null) {%>
+			<div class="kkpt-label kkpt-save"><%=getMsg("product.tile.save")%>&nbsp;<%=formatMoney(saving)%></div>
+		<%}%>
+	<%}%> 
+</div>
+<% if (style == "kkpt-single"){ %>
+	</div>
+<%}%>

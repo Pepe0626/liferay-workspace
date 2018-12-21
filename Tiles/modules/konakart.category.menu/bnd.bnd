@@ -1,0 +1,6 @@
+Bundle-Name: Category Menu Portlet
+Bundle-SymbolicName: konakart.category.menu
+Bundle-Version: 8.9.0.0
+-metatype: *
+Web-ContextPath: /KKCategoryMenu
+-dsannotations: *

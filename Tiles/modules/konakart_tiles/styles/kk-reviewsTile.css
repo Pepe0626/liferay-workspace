@@ -1,0 +1,298 @@
+/*
+# (c) 2015 DS Data Systems UK Ltd, All rights reserved.
+#
+# DS Data Systems and KonaKart and their respective logos, are 
+# trademarks of DS Data Systems UK Ltd. All rights reserved.
+#
+# The information in this document below this text is free software; you can redistribute 
+# it and/or modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+# 
+# This software is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+*/
+
+.kkrt-product-reviews-navigation{
+	display: block;
+	overflow: hidden;
+	width: 100%;
+	border-top: 1px solid #e5e5e5;
+}
+
+.kkrt-product-reviews-navigation-top{
+	overflow: hidden;
+	width: 100%;
+	padding: 0.5em 0 0.25em;
+}
+
+.kkrt-product-reviews-navigation-bottom{
+	overflow: hidden;
+	width: 100%;
+	border-bottom: 1px solid #e5e5e5;
+	padding: 0.25em 0 0.5em 0;
+}
+
+
+.kkrt-product-review-title{
+	font-size: 12.5px;
+	margin-bottom: 5px;
+}
+
+.kkrt-product-review-details{
+	margin-top: 5px;
+	color: #666;
+	font-size: 11.5px;
+}
+
+.kkrt-product-review-details > span{
+	margin: 3px;
+}
+
+.kkrt-product-review-details-date{
+	float: right;
+}
+
+.kkrt-product-review-details-author{
+	font-weight: bold;
+}
+
+/* Rating */
+
+.kkrt-rating {
+	overflow: hidden;
+	padding: 3px 0;
+	float: left;
+	margin-right: 5px;
+}
+
+.kkrt-star{
+	float: left;
+	height: 13px;
+	width: 13px;
+}
+
+.kkrt-star.full{
+	background-image: url('../images/star-full.png');
+}
+
+.kkrt-star.half{
+	background-image: url('../images/star-half.png');
+}
+
+.kkrt-star.empty{
+	background-image: url('../images/star-empty.png');
+}
+
+/* Top left */
+
+.kkrt-number-of-items {
+	float: left;
+}
+
+/* Top right */
+
+.kkrt-pagination {
+	float: right;
+}
+
+.kkrt-pagination .kkrt-current{
+	background-color: #000;
+	color: white;
+	margin-right: 2px;
+}
+
+.kkrt-pagination-element{
+	float: left;
+	height: 20px;
+	text-align: center;
+	width: 20px;
+	cursor: pointer;
+}
+
+.kkrt-previous-items{
+	background: url('../images/arrow-left.png') center center no-repeat;
+	margin-right: 1em;
+}
+
+.kkrt-next-items{
+	margin-left: 0.75em;
+}
+
+.kkrt-previous-items:hover{
+	background: url('../images/arrow-left-hover.png') center center no-repeat;
+}
+
+.kkrt-previous-items-inactive {
+	background: url('../images/arrow-left-inactive.png') center center no-repeat;
+	margin-right: 1em;
+}
+
+.kkrt-next-items{
+	background: url('../images/arrow-right.png') center center no-repeat;
+}
+
+.kkrt-next-items:hover{
+	background: url('../images/arrow-right-hover.png') center center no-repeat;
+}
+
+.kkrt-next-items-inactive{
+	background: url('../images/arrow-right-inactive.png') center center no-repeat;
+	margin-left: 0.75em;
+}
+
+/* Bottom left */
+.kkrt-show-per-page-area {
+	float:left;;
+}
+
+.kkrt-show-per-page {
+	margin-right: 5px;
+}
+
+
+/* Bottom right */
+.kkrt-sort-by-area{
+	float: right;
+}
+
+.kkrt-sort-by{
+	margin-left: 5px;
+}
+
+/* Product Reviews Meters */
+
+#kkrt-average-customer-reviews{
+	height: 140px;
+}
+
+.kkrt-average-customer-reviews-meter-container{
+	float: left;
+	margin-bottom: 5px;
+}
+
+#kkrt-average-customer-reviews-meters{
+	float: left;
+	margin: 20px 0;
+	overflow: hidden;
+	width: 320px;
+}
+
+.kkrt-average-customer-reviews-meter{
+	background-color: #e1edf7;
+	float: left;
+	height: 14px;
+	width: 190px;
+}
+
+.kkrt-average-customer-reviews-meter-label{
+	float: left;
+	width: 60px;
+}
+
+.kkrt-average-customer-reviews-number{
+	color: #666;
+	float: left;
+	font-size: 12px;
+	margin-left: 5px;
+}
+
+.kkrt-average-customer-reviews-meter > span{
+	background-color: #3689c9;
+	display: block;
+	height: 100%;
+}
+
+#kkrt-average-customer-reviews-stars{
+	float: left;
+	margin: 20px 0;
+	font-size: 12px;
+	font-weight: bold;	
+}
+
+#kkrt-average-customer-reviews-stars .write-review{
+	float: left;
+	margin: 20px 0;
+}
+
+.kkrt-write-review{
+	float: left;
+	margin: 20px 0;
+}
+
+.kkrt-text-link {
+	color: #1a6baa !important;
+	cursor:pointer;
+}
+
+/* Rating */
+
+.kkrt-rating-big{
+	overflow: hidden;
+	padding: 3px 0;
+}
+
+.kkrt-star-big{
+	float: left;
+	height: 17px;
+	width: 17px;
+}
+
+.kkrt-star-big.full{
+	background-image: url('../images/star-full-big.png');
+}
+
+.kkrt-star-big.half{
+	background-image: url('../images/star-half-big.png');
+}
+
+.kkrt-star-big.empty{
+	background-image: url('../images/star-empty-big.png');
+}
+
+#kkrt-star-reviews-link{
+	font-size: 11.5px;
+	margin-left: 5px;
+}
+
+/*
+* Write Review
+*/
+
+.kwrt-input{
+	display: table;
+	width:100%;
+	margin-bottom:10px;
+}
+
+.kkwrt-rating-text{
+	color:"#000000";
+}
+
+.kk-form-section .kwrt-input .kk-validation-msg {
+	margin-left:20px;
+	float: left;
+	width: 100px;
+	color: #A00000;
+}
+
+.kwrt-input .kk-form-input label {
+	float: left;
+	width: 150px;
+}
+
+.kwrt-input .kk-form-input textarea {
+	margin-top: 10px;
+	float: left;
+	width: 100%;
+	height: 200px
+}
+.kwrt-input .kk-form-input .kkwrt-rating-buttons {
+	float: left;
+	width: 550px;
+}
+
+

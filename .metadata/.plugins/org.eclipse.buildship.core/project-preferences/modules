@@ -1,0 +1,10 @@
+#
+#Mon Dec 17 10:59:06 CST 2018
+linkedResources=
+managedNatures=
+classpath=<?xml version\="1.0" encoding\="UTF-8"?>\n<classpath>\n</classpath>\n
+subprojectPaths=konakart.banners;konakart.breadcrumbs;konakart.category.menu;konakart.horizontal.carousel;konakart.product;konakart.search;konakart.store;konakart.store.body;konakart.top.menu;konakart.vertical.carousel
+derivedResources=.gradle;build;konakart.banners/build;konakart.breadcrumbs/build;konakart.category.menu/build;konakart.horizontal.carousel/build;konakart.product/build;konakart.search/build;konakart.store/build;konakart.store.body/build;konakart.top.menu/build;konakart.vertical.carousel/build
+buildScriptPath=build.gradle
+managedBuilders=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><commands/>
+buildDir=build

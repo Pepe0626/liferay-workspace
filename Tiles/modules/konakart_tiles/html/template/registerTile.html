@@ -1,0 +1,217 @@
+<%
+//(c) 2015 DS Data Systems UK Ltd, All rights reserved.
+//
+//DS Data Systems and KonaKart and their respective logos, are
+//trademarks of DS Data Systems UK Ltd. All rights reserved.
+//
+//The information in this document is free software;you can redistribute
+//it and/or modify it under the terms of the GNU Lesser General Public
+//License as published by the Free Software Foundation; either
+//version 2.1 of the License, or (at your option) any later version.
+//
+//This software is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+//Lesser General Public License for more details.
+%>
+
+<script type="text/javascript">
+	$(function() {
+		$.datepicker.setDefaults($.datepicker.regional['<%=locale.slice(0,2)%>']);
+		$('#kkDatepicker').datepicker({changeMonth: true, changeYear: true, dateFormat: '<%=getMsg("datepicker.date.format")%>', yearRange: "-120:-10", minDate: '-120y', maxDate: '-10y'});
+	});	
+</script>	
+
+
+<h1 id="kk-page-title"><%=getMsg("register.tile.new.account")%></h1>
+
+<div class="kk-content-area kk-rounded-corners">
+	<div>
+		<div id="kk-error"></div>
+		<form action="#" id="kk-register-form" method="post"> 
+			<div class="kk-form-section">
+				<div>
+					<h3><%=getMsg("register.tile.personal.details")%><span class="kk-required-text"><span class="kk-required-icon kk-required-blue"></span>&nbsp;<%=getMsg("register.tile.required.fields")%></span></h3>							
+				</div>
+				<div class="kk-form-section-fields">
+					<div class="kk-form-section-divider"></div>
+					<div class="kk-form-input kk-radio-buttons">
+						<label><%=getMsg("register.tile.gender")%></label>
+						<span class="kk-radio-button"><input type="radio" name="kkGender" value="m" "checked" > <%=getMsg("register.tile.male")%></span> 
+						<span class="kk-radio-button"><input type="radio" name="kkGender" value="f" > <%=getMsg("register.tile.female")%></span>
+						<span class="kk-required-icon kk-required-blue"></span>	
+						<span class="kk-validation-msg"></span>							
+					</div>				
+					<div class="kk-form-input">
+						<label><%=getMsg("register.tile.first.name")%></label>
+						<input type="text" value="" id="kkFirstName" name="kkFirstName"/>
+						<span class="kk-required-icon kk-required-blue"></span>
+						<span class="kk-validation-msg"></span>
+					</div>
+					<div class="kk-form-input">
+						<label><%=getMsg("register.tile.last.name")%></label>
+						<input type="text" value="" id="kkLastName" name="kkLastName"/>
+						<span class="kk-required-icon kk-required-blue"></span>
+						<span class="kk-validation-msg"></span>
+					</div>
+					<div class="kk-form-input">
+						<label><%=getMsg("register.tile.dob")%></label>
+						<input type="text" id="kkDatepicker"  value="" name="kkBirthDateString"/>
+						<span class="kk-required-icon kk-required-blue"></span>
+						<span class="kk-validation-msg"></span>
+					</div>
+					<div class="kk-form-input">
+						<label><%=getMsg("register.tile.email")%></label>
+						<input type="text" value=""  id="kkEmailAddr" name="kkEmailAddr"/>
+						<span class="kk-required-icon kk-required-blue"></span>
+						<span class="kk-validation-msg"></span>
+					</div>
+					<div class="kk-form-input">
+						<label><%=getMsg("register.tile.username")%></label>
+						<input type="text" value=""  id="kkUsername" name="kkUsername"/>
+						<span class="kk-validation-msg"></span>
+					</div>
+				</div>
+			</div>
+			<div class="kk-form-section">
+				<h3><%=getMsg("register.tile.company.details")%></h3>
+				<div class="kk-form-section-fields">
+					<div class="kk-form-section-divider"></div>
+					<div class="kk-form-input">
+						<label><%=getMsg("register.tile.company.name")%></label>
+						<input type="text" value="" id="kkCompany" name="kkCompany"/>
+						<span class="kk-validation-msg"></span>
+					</div>
+					<div class="kk-form-input">
+						<label><%=getMsg("register.tile.tax.id")%></label>
+						<input type="text" value="" id="kkTaxId" name="kkTaxId"/>
+						<span class="kk-validation-msg"></span>
+					</div>
+				</div>
+			</div>
+			<div class="kk-form-section">
+				<h3><%=getMsg("register.tile.addr")%></h3>
+				<div class="kk-form-section-fields">
+					<div class="kk-form-section-divider"></div>
+					<div class="kk-form-input">
+						<label><%=getMsg("register.tile.street.addr")%></label>
+						<input type="text" value="" id="kkStreetAddress" name="kkStreetAddress"/>
+						<span class="kk-required-icon kk-required-blue"></span>
+						<span class="kk-validation-msg"></span>
+					</div>
+					<div class="kk-form-input">
+						<label><%=getMsg("register.tile.street.addr1")%></label>
+						<input type="text" value="" id="kkStreetAddress1" name="kkStreetAddress1" />
+						<span class="kk-validation-msg"></span>
+					</div>
+					<div class="kk-form-input">
+						<label><%=getMsg("register.tile.suburb")%></label>
+						<input  type="text" value="" id="kkSuburb" name="kkSuburb"/>
+						<span class="kk-validation-msg"></span>
+					</div>
+					<div class="kk-form-input">
+						<label><%=getMsg("register.tile.postcode")%></label>
+						<input type="text" value="" id="kkPostcode" name="kkPostcode" />
+						<span class="kk-required-icon kk-required-blue"></span>
+						<span class="kk-validation-msg"></span>
+					</div>
+					<div class="kk-form-input">
+						<label><%=getMsg("register.tile.city")%></label>
+						<input type="text" value="" id="kkCity" name="kkCity" />
+						<span class="kk-required-icon kk-required-blue"></span>
+						<span class="kk-validation-msg"></span>
+					</div>
+					<div class="kk-form-input" id="kk-form-zone-select" >
+						<label><%=getMsg("register.tile.state")%></label>
+						<select id="kkStateList" name="kkStateList" class="kkState">
+							<option value="-1"><%=getMsg("register.tile.select")%></option>
+							<% for (var i = 0; i < zones.length; i++){ %>
+								<% var zone = zones[i];%>
+								<option  value="<%=zone.zoneName%>"><%=zone.zoneName%></option>
+							<% } %>
+						</select>
+						<span class="kk-required-icon kk-required-blue"></span>
+						<span class="kk-validation-msg"></span>
+					</div>
+					<div class="kk-form-input" id="kk-form-zone-input">
+						<label><%=getMsg("register.tile.state")%></label>
+						<input type="text" id="kkState" name="kkState" />
+						<span class="kk-required-icon kk-required-blue"></span>
+						<span class="kk-validation-msg"></span>
+					</div>
+					<div class="kk-form-input">
+						<label><%=getMsg("register.tile.country")%></label>
+							<select id="kkCountryId" name="kkCountryId" onchange="kk.changeCountry();">
+								<option value="-1"><%=getMsg("register.tile.select")%></option>
+									<%if (countries != null){%>
+										<%for ( var i = 0; i < countries.length; i++)	{%>
+											<%var country = countries[i];%>
+											<%if (country.isoCode3 == defaultCountryCode){ %>
+												<option selected="selected" value="<%=country.id%>"><%=country.name%></option>
+											<% } else { %>
+												<option value="<%=country.id%>"><%=country.name%></option>
+											<% } %>														                 
+										<% } %>           
+									<% } %>																
+							</select>
+						<span class="kk-required-icon kk-required-green"></span>
+						<span class="kk-validation-msg"></span>
+					</div>
+				</div>
+			</div>
+			<div class="kk-form-section">
+				<h3><%=getMsg("register.tile.contact.info")%></h3>
+				<div class="kk-form-section-fields">
+					<div class="kk-form-section-divider"></div>
+					<div class="kk-form-input">
+						<label><%=getMsg("register.tile.tel.number")%></label>
+						<input type="text" value="" id="kkTelephoneNumber" name="kkTelephoneNumber" />
+						<span class="kk-required-icon kk-required-blue"></span>
+						<span class="kk-validation-msg"></span>
+					</div>
+					<div class="kk-form-input">
+						<label><%=getMsg("register.tile.tel.number1")%></label>
+						<input type="text" value="" id="kkTelephoneNumber1" name="kkTelephoneNumber1" />
+						<span class="kk-validation-msg"></span>
+					</div>
+					<div class="kk-form-input">
+						<label><%=getMsg("register.tile.fax.number")%></label>
+						<input type="text" value="" id="kkFaxNumber" name="kkFaxNumber" />
+						<span class="kk-validation-msg"></span>
+					</div>
+				</div>
+			</div>
+			<div class="kk-form-section">
+				<h3><%=getMsg("register.tile.subscriptions")%></h3>
+				<div class="kk-form-section-fields">
+					<div class="kk-form-section-divider"></div>
+					<div class="kk-form-input">
+						<label><%=getMsg("register.tile.newsletter")%></label>
+						<input type="checkbox" id="kkNewsletter" name="kkNewsletter">
+					</div>
+				</div>
+			</div>
+			<div class="kk-form-section">
+				<h3><%=getMsg("register.tile.password")%></h3>
+				<div class="kk-form-section-fields">
+					<div class="kk-form-section-divider"></div>
+					<div class="kk-form-input">
+						<label><%=getMsg("register.tile.password")%></label>
+						<input type="password" name="kkPassword" id="kkPassword" autocomplete="off" value=""/>
+						<span class="kk-required-icon kk-required-blue"></span>
+						<span class="kk-validation-msg"></span>
+					</div>
+					<div class="kk-form-input">
+						<label><%=getMsg("register.tile.confirm.password")%></label>
+						<input type="password" id="kkPasswordConfirmation" name="kkPasswordConfirmation" autocomplete="off" value=""/>
+						<span class="kk-required-icon kk-required-blue"></span>
+						<span class="kk-validation-msg"></span>
+					</div>
+				</div>
+			</div>
+			<div class="kk-form-buttons">
+				<a  id="kk-register" class="kk-continue-button kk-button kk-small-rounded-corners"><span><%=getMsg("register.tile.continue")%></span></a>
+			</div>
+		</form>
+	</div>
+</div>

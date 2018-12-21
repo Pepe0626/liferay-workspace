@@ -1,0 +1,44 @@
+<%
+//(c) 2015 DS Data Systems UK Ltd, All rights reserved.
+//
+//DS Data Systems and KonaKart and their respective logos, are
+//trademarks of DS Data Systems UK Ltd. All rights reserved.
+//
+//The information in this document is free software;you can redistribute
+//it and/or modify it under the terms of the GNU Lesser General Public
+//License as published by the Free Software Foundation; either
+//version 2.1 of the License, or (at your option) any later version.
+//
+//This software is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+//Lesser General Public License for more details.
+%>
+	
+
+<h1 id="kk-page-title"><%=getMsg("customer.info.newsletter.subscriptions")%></h1>			
+<div class="kk-content-area kk-rounded-corners">
+	<div>
+		<form action="#" id="kk-newsletter-subscription-form" method="post">
+			<div class="kk-form-section">
+				<div class="kk-newsletter-header">
+					<div class="kk-newsletter-checkbox">					
+						<% if (customer.newsletter == 1){ %>
+							<input type="checkbox" id="kkNewsletter" name="kkNewsletter" checked>
+						<%} else { %>
+							<input type="checkbox" id="kkNewsletter" name="kkNewsletter">
+						<%}%>
+					</div>
+					<div class="kk-newsletter-explanation">	
+						<%=getMsg("customer.info.newsletter.contents")%>.
+					</div>
+				</div>
+			</div>
+			<div class="kk-form-buttons-wide">
+				<a id="kk-newsletter-subscription-submit" class="kk-continue-button kk-button kk-small-rounded-corners"><span><%=getMsg("customer.info.continue")%></span></a>
+				<a  id="kk-cust-info-back" class="kk-button kk-small-rounded-corners"><span><%=getMsg("customer.info.back")%></span></a>
+			</div>
+		</form>
+	</div>
+</div>
+

@@ -1,0 +1,179 @@
+/*
+# (c) 2015 DS Data Systems UK Ltd, All rights reserved.
+#
+# DS Data Systems and KonaKart and their respective logos, are 
+# trademarks of DS Data Systems UK Ltd. All rights reserved.
+#
+# The information in this document below this text is free software; you can redistribute 
+# it and/or modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+# 
+# This software is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+*/
+
+.kkod-options{
+	float: left;
+	font-size: 11px;
+	margin-top: 10px;
+}
+.kkod-option{
+	float: left;
+	padding: 0 5px;
+}
+
+.kkod-heading-container{
+	border-bottom: 1px solid #dadada;
+	margin-bottom: 7.5px;
+	overflow: hidden;
+}
+
+.kkod-heading-container h3{
+	float: left;
+	padding: 7.5px 5px 7.5px 0;
+	margin: 0;
+}
+
+.kkod-area{
+	padding-bottom: 7.5px;
+}
+
+.kkod-area-content label{
+	font-weight: bold;
+	margin-top: 3px;
+	width:140px;
+	float:left;
+}
+
+#kkod-column-left{
+	float: left;
+	margin-right: 5%;	
+	width: 60%;
+}
+
+#kkod-column-right{
+	float: left;
+	width: 35%;
+}
+
+#kkod-column-right table thead td{
+	font-weight: bold;
+}
+
+#kkod-column-right table td{
+	padding-right: 5px;
+	width: auto;
+}
+
+#kkod-column-right table tr .kkod-wide-col{
+	width: 60% !important;
+}
+
+#kkod-column-right table tr .kkod-narrow-col{
+	width: 20% !important;
+}
+
+#kkod-button-container{
+	border-top: 1px solid #dadada;
+	float: left;
+	margin-top: 7.5px;
+	padding-top: 15px;
+	width: 100%;
+}
+
+.kkod-shopping-cart-item-option{
+	font-size: 10px;
+	font-style: italic;  
+}
+
+.kkod-text-link {
+	color: #1a6baa !important;
+	cursor:pointer;
+}
+
+.kkod-discount{
+	color: #cc0000;
+}
+
+.kkod-shopping-cart-total {
+	border-top: 1px solid #dadada;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.kkod-shopping-cart-subtotal {
+	border-top: 1px solid #dadada;
+}
+
+#kkod-column-right table {
+  border-collapse: collapse;
+}
+
+#kkod-repeat-button {
+	float:right;
+}	
+
+#kkod-back-button {
+	float:left;
+}
+
+#kkod-status-notes table{
+	table-layout: fixed;
+	width:100%;
+}
+
+#kkod-payment-method {
+	display:table;
+}
+
+#kkod-shipping-info {
+	display:table;
+}
+
+/*
+* Shipment
+*/
+
+.kkod-bold{
+	font-weight: bold;	
+}
+
+.kkod-25-col {
+	width: 25%;	
+}
+
+.kkod-40-col {
+	width: 40%;	
+}
+
+.kkod-50-col {
+	width: 50%;	
+}
+
+.kkod-60-col {
+	width: 60%;	
+}
+
+.kkod-shipment-area{
+	padding-bottom: 7.5px;
+}
+
+.kkod-shipment-container{	
+	border-bottom: 1px solid #dadada;	
+}
+
+.kkod-shipment-container, .kkod-shipment-container-no-border {	
+	padding-bottom: 7.5px;	
+}
+
+.kkod-shipment-container table thead td, .kkod-shipment-container-no-border table thead td {
+	font-weight: bold;
+}
+
+.kkod-shipment-container, .kkod-shipment-container-no-border, .kkod-shipment-container table, .kkod-shipment-container-no-border table {
+	width: 100%;
+}

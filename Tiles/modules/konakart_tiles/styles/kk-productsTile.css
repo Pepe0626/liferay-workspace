@@ -1,0 +1,158 @@
+/*
+# (c) 2015 DS Data Systems UK Ltd, All rights reserved.
+#
+# DS Data Systems and KonaKart and their respective logos, are 
+# trademarks of DS Data Systems UK Ltd. All rights reserved.
+#
+# The information in this document below this text is free software; you can redistribute 
+# it and/or modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+# 
+# This software is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+*/
+.kkps-items{
+	overflow: hidden;
+	padding: 0px;
+}
+
+.kkps-items ul{
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+.kkps-items li{
+	float: left;
+	list-style: none;
+	width: 180px;
+}
+
+.kkps-item-area{
+	background: #fff;
+	margin-top: 1em;
+	display: inline-block;
+	overflow: hidden;
+	width: 100%;
+}
+
+.kkps-item-area-header {
+	height: auto;
+	overflow: hidden;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.kkps-item-area-header-top, .kkps-item-area-header-bottom {
+	overflow: hidden;
+	width: 100%;
+}
+
+.kkps-item-area-header-top{
+	border-top: 1px solid #e5e5e5;
+}
+
+.kkps-navigation-element{	
+	padding: 10px;
+}
+
+/* Top left */
+
+.kkps-number-of-items {
+	float: left;
+}
+
+/* Top right */
+
+.kkps-pagination {
+	float: right;
+}
+
+.kkps-pagination .kkps-current{
+	background-color: #000;
+	color: white;
+	margin-right: 2px;
+}
+
+.kkps-pagination-element{
+	float: left;
+	height: 20px;
+	text-align: center;
+	width: 20px;
+	cursor: pointer;
+}
+
+.kkps-previous-items{
+	background: url('../images/arrow-left.png') center center no-repeat;
+	margin-right: 1em;
+}
+
+.kkps-next-items{
+	margin-left: 0.75em;
+}
+
+.kkps-previous-items:hover{
+	background: url('../images/arrow-left-hover.png') center center no-repeat;
+}
+
+.kkps-previous-items-inactive {
+	background: url('../images/arrow-left-inactive.png') center center no-repeat;
+	margin-right: 1em;
+}
+
+.kkps-next-items{
+	background: url('../images/arrow-right.png') center center no-repeat;
+}
+
+.kkps-next-items:hover{
+	background: url('../images/arrow-right-hover.png') center center no-repeat;
+}
+
+.kkps-next-items-inactive{
+	background: url('../images/arrow-right-inactive.png') center center no-repeat;
+	margin-left: 0.75em;
+}
+
+/* Bottom left */
+.kkps-show-per-page-area {
+	float:left;;
+}
+
+.kkps-show-per-page {
+	margin-right: 5px;
+}
+
+
+/* Bottom right */
+.kkps-sort-by-area{
+	float: right;
+}
+
+.kkps-sort-by{
+	margin-left: 5px;
+}
+
+/* Suggested spelling */
+
+.kkps-spelling-suggestions{
+	margin-left: 100px;
+	font-weight: bold;
+}
+
+.kkps-spelling-suggestion{
+	color: #1a6baa !important;
+	cursor:pointer;
+}
+
+.kkps-spelling-suggestion:hover{
+	color: #1a6baa;
+	text-decoration: underline;
+}
+
+.kkps-items-message{
+	overflow: hidden;
+	padding: 20px;
+}

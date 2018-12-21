@@ -1,0 +1,116 @@
+<%
+//(c) 2015 DS Data Systems UK Ltd, All rights reserved.
+//
+//DS Data Systems and KonaKart and their respective logos, are
+//trademarks of DS Data Systems UK Ltd. All rights reserved.
+//
+//The information in this document is free software;you can redistribute
+//it and/or modify it under the terms of the GNU Lesser General Public
+//License as published by the Free Software Foundation; either
+//version 2.1 of the License, or (at your option) any later version.
+//
+//This software is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+//Lesser General Public License for more details.
+%>
+
+<%if (reviews != null && reviews.length > 0){ %>
+	<div id="kkrt-average-customer-reviews">
+		<div id="kkrt-average-customer-reviews-meters">
+			<% for (var i = 5; i > 0; i--){ %>
+				<%var qty = ratingQuantity[i-1]; %>
+				<div class="kkrt-average-customer-reviews-meter-container">
+					<div class="kkrt-average-customer-reviews-meter-label">
+						<%if (qty > 0){ %> 
+							<a  id='<%="kkrt-"+i%>' class="kkrt-review-meter-rating">
+								<span class="<%=(searchRating==i)?"kk-selected":"kk-not-selected"%>"></span><%=i%>&nbsp;<%=getMsg("reviews.tile.stars")%>
+							</a>
+						<%}else{%>
+							<span class="<%=(searchRating==i)?"kk-selected":"kk-not-selected"%>"></span><%=i%>&nbsp;<%=getMsg("reviews.tile.stars")%>
+						<%}%>
+					</div>
+					<div class="kkrt-average-customer-reviews-meter">
+						<span id="<%=i%>star" style="width:<%=ratingPercentage[i-1]%>%"></span>
+					</div>
+					<div class="kkrt-average-customer-reviews-number">(<%=qty%>)</div>				    					
+				</div>
+			<%}%>    				
+		</div>
+		<div id="kkrt-average-customer-reviews-stars">
+			<div id="kkrt-average-customer-reviews-stars-title"><%=getMsg("reviews.tile.average.reviews")%>:</div>
+			<%var rating = (prod.rating == null) ? 0 : formatNumber(prod.rating,0);%>
+			<div class="kkrt-rating-big">
+				<%for (var i = 0; i < rating; i++){%>
+					<span class="kkrt-star-big full"></span>
+				 <%}%>
+				<%for (var i = rating; i < 5; i++){%>
+					<span class="kkrt-star-big empty"></span>
+				<%}%>
+				<%var ratingDecStr = (prod.rating==null)?"0":Math.round(prod.rating*10) / 10; %>
+				&nbsp;(<%=ratingDecStr%>)
+			</div>
+			<div class="kkrt-write-review">
+				<a href='#' id='<%="kkrt-"+prod.id%>' class="kkrt-write-review-button kk-button kk-small-rounded-corners"><%=getMsg("reviews.tile.write.review")%></a>	
+			</div>
+		</div>
+	</div>
+	<div class="kkrt-product-reviews-navigation">
+		<div class="kkrt-product-reviews-navigation-top">
+			<span class="kkrt-number-of-items kkrt-navigation-element"><%=dataDesc.offset+1%>-<%=+dataDesc.offset + +numRevs%> <%=getMsg("reviews.tile.of")%> <%=totalNumRevs%></span>
+			<span class="kkrt-pagination kkrt-navigation-element">
+				<a class="kkrt-pagination-element kkrt-previous-items<%=(showBack)?"":"-inactive"%>" id='<%=prod.id+"-B"%>'></a>
+				<% for ( var i = 0; i < pageList.length; i++) { %>
+					<% var page = pageList[i]; %>
+					<% if (page == currentPage) { %>
+						<a class="kkrt-pagination-element kkrt-page-num kkrt-current" id='<%=prod.id+"p-"+page%>'><%=page%></a>
+					<% } else { %>
+						<a class="kkrt-pagination-element kkrt-page-num" id='<%=prod.id+"p-"+page%>'><%=page%></a>
+					<% } %>
+				<% }  %>         
+				<a class="kkrt-pagination-element kkrt-next-items<%=(showNext)?"":"-inactive"%>" id='<%=prod.id+"-F"%>'></a>
+			</span>
+		</div>
+		<div class="kkrt-product-reviews-navigation-bottom">
+			<span class="kkrt-show-per-page-area kkrt-navigation-element">
+				<select class="kkrt-show-per-page" id='<%=prod.id + "-P1"%>' onchange="kk.changeReviewsPageSize('<%=prod.id + "-P1"%>')">
+					<option value="5"<%=(maxRevsPerPage==5)?' selected="selected"':''%>>5</option>
+					<option value="10"<%=(maxRevsPerPage==10)?' selected="selected"':''%>>10</option>
+					<option value="15"<%=(maxRevsPerPage==15)?' selected="selected"':''%>>15</option>
+					<option value="20"<%=(maxRevsPerPage==20)?' selected="selected"':''%>>20</option>
+				</select>
+				<%=getMsg("reviews.tile.per.page")%>
+			</span>
+		   <span class="kkrt-sort-by-area kkrt-navigation-element"><%=getMsg("reviews.tile.sort")%>: 
+				<select class="kkrt-sort-by" id='<%=prod.id+"-O1"%>' onchange="kk.changeReviewsSortBy('<%=prod.id+"-O1"%>')">
+					<option value="ORDER_BY_DATE_ADDED_DESCENDING"<%=(dataDesc.orderBy=='ORDER_BY_DATE_ADDED_DESCENDING')?' selected="selected"':''%>><%=getMsg("reviews.tile.sort.by.most.recent")%></option>
+					<option value="ORDER_BY_DATE_ADDED_ASCENDING"<%=(dataDesc.orderBy=='ORDER_BY_DATE_ADDED_ASCENDING')?' selected="selected"':''%>><%=getMsg("reviews.tile.sort.by.oldest")%></option>
+					<option value="ORDER_BY_RATING_DESCENDING"<%=(dataDesc.orderBy=='ORDER_BY_RATING_DESCENDING')?' selected="selected"':''%>><%=getMsg("reviews.tile.sort.by.rating.desc")%></option>
+					<option value="ORDER_BY_RATING_ASCENDING"<%=(dataDesc.orderBy=='ORDER_BY_RATING_ASCENDING')?' selected="selected"':''%>><%=getMsg("reviews.tile.sort.by.rating.asc")%></option>
+				</select> 
+			</span>
+		</div>
+	</div>
+	<div id="kkrt-product-reviews-area">
+		<% for (var i = 0; i < reviews.length; i++){ %>
+			<% var rev = reviews[i];%>
+			<div class="kkrt-product-review">	
+				<div class="kkrt-rating">
+					<%for (var j = 0; j < rev.rating; j++){%>
+						<span class="kkrt-star full"></span>
+					<%}%>
+					<%for (var j = rev.rating; j < 5; j++){%>
+						<span class="kkrt-star empty"></span>
+					<%}%>					    						
+				</div>
+				<div class="kkrt-product-review-details">
+					<%=getMsg("reviews.tile.by")%> <span class="kkrt-product-review-details-author"><%=rev.customerName%></span>
+					<span class="kkrt-product-review-details-date"><%=formatDate(rev.dateAdded)%></span>
+				</div>
+				<p><%=rev.reviewText%></p>
+			</div>
+		<%}%>
+	</div>
+<% } else { %>
+	<p style="clear:both"><a href='#' id='<%="kkrt-"+prod.id%>' class="kkrt-write-review-button kkrt-text-link"><%=getMsg("reviews.tile.write.first.review")%></a></p>
+<% } %>
