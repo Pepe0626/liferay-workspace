@@ -1,0 +1,6 @@
+Bundle-Name: Portlet1
+Bundle-SymbolicName: com.consistent.Portlet1
+Bundle-Version: 1.0.0
+Export-Package: com.consistent.Portlet1.constants
+
+Include-Resource: @commons-csv-1.3.jar

@@ -1,0 +1,12 @@
+dependencies {
+	compile 'com.liferay.portal:com.liferay.portal.kernel:2.0.0'
+	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.kernel"
+	compileOnly group: "com.liferay.portal", name: "com.liferay.util.taglib"
+	compileOnly group: "javax.portlet", name: "portlet-api"
+	compileOnly group: "javax.servlet", name: "javax.servlet-api"
+	compileOnly group: "jstl", name: "jstl"
+	compileOnly group: "org.osgi", name: "osgi.cmpn"
+	
+	compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
+	compile group: 'org.apache.commons', name: 'commons-csv', version: '1.3'
+}

@@ -2,14 +2,18 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="kkpdtContext" key="selection"/>
+		<item value="bannerArray" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="bannerArray"/>
+			<item value="GETCONFIG"/>
+			<item value="getConfig"/>
+			<item value="standardPort"/>
+			<item value="content"/>
+			<item value="getImageBase"/>
 			<item value="&quot;body-tile"/>
 			<item value="if (prod.quantity &gt; qtyWarn)"/>
-			<item value="prod"/>
-			<item value="http://www.konakart.com/"/>
 		</list>
 		<list key="replacehistory">
 		</list>

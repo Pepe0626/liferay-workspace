@@ -38,6 +38,7 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
      </script>
 <link type="text/css" rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css" />
 <link type="text/css" rel="stylesheet" href="http://localhost:8780/konakart_tiles/gensrc/styles/kk-tile-gen.min.css" />
+<link type="text/css" rel="stylesheet" href="http://localhost:8780/konakart_tiles/gensrc/styles/carrusel_b.css" />
 <link type="text/css" rel="stylesheet" href="http://localhost:8780/konakart_tiles/gensrc/styles/jcarousel.css" />				
 <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />	
 			
@@ -54,6 +55,7 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <script type="text/javascript" src="http://localhost:8780/konakart_tiles/gensrc/styles/kk-tile-gen.min.csskonakart_tiles/gensrc/script/jquery.ui.datepicker-en.js"></script>
 <script type="text/javascript" src="http://localhost:8780/konakart_tiles/gensrc/styles/kk-tile-gen.min.csskonakart_tiles/gensrc/script/polyglot.js"></script>
 <script type="text/javascript" src="http://localhost:8780/konakart_tiles/gensrc/styles/kk-tile-gen.min.csskonakart_tiles/gensrc/script/kk-tile-gen.min.js"></script>
+<script type="text/javascript" src="http://localhost:8780/konakart_tiles/gensrc/styles/kk-tile-gen.min.csskonakart_tiles/gensrc/script/carrusel_b.js"></script>
      <script>
          define.amd = define._amd;
     </script>
